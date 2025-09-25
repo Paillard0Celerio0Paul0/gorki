@@ -79,7 +79,7 @@ const participants = [
     dpmLink: "https://dpm.lol/player/firespirit"
   }, {
     name: "Ivyshade",
-    catchphrase: "",
+    catchphrase: "macacos fuegos - je flame pas, je bruuule",
     peakElo: "Gold",
     objective: "Platinum",
     dpmLink: "https://dpm.lol/player/firespirit"
