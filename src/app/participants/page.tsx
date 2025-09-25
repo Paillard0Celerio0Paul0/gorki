@@ -105,7 +105,7 @@ const participants = [
   {
     name: "Ronron",
     catchphrase: "PiouPiou Ratatatata",
-    peakElo: "Je compte pas le pick émeraude 4 donc mon pick c'est plat 3 max je crois",
+    peakElo: "Je compte pas le peak émeraude 4 donc mon peak c'est plat 3 max je crois",
     objective: "Platinum 4",
     dpmLink: "https://dpm.lol/player/ronron"
   },
