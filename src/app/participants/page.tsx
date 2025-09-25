@@ -5,145 +5,145 @@ import PlayerCard from '@/components/PlayerCard';
 // Données des participants
 const participants = [
   {
-    name: "Rhaaamen",
-    catchphrase: "Annihiliation",
-    peakElo: "Master 70 LP",
-    objective: "Master",
-    dpmLink: "https://dpm.lol/player/gorki"
-  },
-  {
     name: "Ebzi",
     catchphrase: "",
     peakElo: "Master 180 LP",
     objective: "Master",
-    dpmLink: "https://dpm.lol/player/shadowstrike"
+    dpmLink: "https://dpm.lol/player/ebzi"
   },
   {
-    name: "Taouil",
-    catchphrase: "Canapé gaming",
-    peakElo: "Platinum 2",
-    objective: "Emeraude 2",
-    dpmLink: "https://dpm.lol/player/lightningbolt"
-  },
-  {
-    name: "Tiz",
-    catchphrase: "Meilleur garen du serveur",
-    peakElo: "Platinum 4",
-    objective: "High Gold",
-    dpmLink: "https://dpm.lol/player/icequeen"
+    name: "Rhaaamen",
+    catchphrase: "Annihiliation",
+    peakElo: "Master 70 LP",
+    objective: "Master",
+    dpmLink: "https://dpm.lol/player/rhaaamen"
   },
   {
     name: "Francis",
     catchphrase: "Undeserved diamond",
     peakElo: "Diamant 1 BO Master",
     objective: "Diamant 4",
-    dpmLink: "https://dpm.lol/player/thunderfist"
+    dpmLink: "https://dpm.lol/player/francis"
+  },
+  {
+    name: "Very Angry Cat",
+    catchphrase: "77% chat 33% sel grind 110% excrémentiel",
+    peakElo: "Diamant 3",
+    objective: "Platinum",
+    dpmLink: "https://dpm.lol/player/veryangrycat"
+  },
+  {
+    name: "Thomus",
+    catchphrase: " la fraude - cc moi c'est la fraude, je suis la pour démontrer que plusieurs personnes dans ce Discord sont des fraudes et qu'ils ne méritent pas leur elo de boosted",
+    peakElo: "Diamant 4",
+    objective: "Gold 4",
+    dpmLink: "https://dpm.lol/player/thomus"
+  },
+  {
+    name: "Scar",
+    catchphrase: "",
+    peakElo: "Diamant 4",
+    objective: "Emeraude 4",
+    dpmLink: "https://dpm.lol/player/scar"
+  },
+  {
+    name: "Kryzen",
+    catchphrase: "la chienneté en lacoste ",
+    peakElo: "Emeraude 1",
+    objective: "Emeraude 3",
+    dpmLink: "https://dpm.lol/player/kryzen"
+  },
+  {
+    name: "Housmi",
+    catchphrase: "I WILL TRADE",
+    peakElo: "Emeraude 3",
+    objective: "Top 5 du challenge",
+    dpmLink: "https://dpm.lol/player/housmi"
+  },
+  {
+    name: "Wazaks",
+    catchphrase: "Id0ntgankbot",
+    peakElo: "Emeraude 3",
+    objective: "Platinum 4",
+    dpmLink: "https://dpm.lol/player/wazaks"
+  },
+  {
+    name: "Taouil",
+    catchphrase: "Canapé gaming",
+    peakElo: "Platinum 2",
+    objective: "Emeraude 2",
+    dpmLink: "https://dpm.lol/player/taouil"
+  },
+  {
+    name: "Jessim",
+    catchphrase: "ZAcOnly",
+    peakElo: "Platinum 2",
+    objective: "Emeraude 1 - Diamant 4",
+    dpmLink: "https://dpm.lol/player/jessim"
+  },
+  {
+    name: "Reis",
+    catchphrase: "Mes chaînes brisent les hauts gradés , l'émeraude n'est qu'une formalité",
+    peakElo: "Platinum 2",
+    objective: "Emeraude",
+    dpmLink: "https://dpm.lol/player/reis"
+  },
+  {
+    name: "Kiro",
+    catchphrase: "Road to Iron 4",
+    peakElo: "Platinum 3",
+    objective: "Gold 2",
+    dpmLink: "https://dpm.lol/player/kiro"
   },
   {
     name: "Ronron",
     catchphrase: "PiouPiou Ratatatata",
     peakElo: "Je compte pas le pick émeraude 4 donc mon pick c'est plat 3 max je crois",
     objective: "Platinum 4",
-    dpmLink: "https://dpm.lol/player/windwalker"
+    dpmLink: "https://dpm.lol/player/ronron"
+  },
+  {
+    name: "Lastells",
+    catchphrase: "rhamen la pas ou jte dose",
+    peakElo: "Platinum 4",
+    objective: "Platinum 4",
+    dpmLink: "https://dpm.lol/player/lastells"
+  },
+  {
+    name: "Tiz",
+    catchphrase: "Meilleur garen du serveur",
+    peakElo: "Platinum 4",
+    objective: "High Gold",
+    dpmLink: "https://dpm.lol/player/tiz"
   },
   {
     name: "Goyonx",
     catchphrase: "Better than Housmi",
     peakElo: "Gold 1",
     objective: "Platinum 4",
-    dpmLink: "https://dpm.lol/player/firespirit"
+    dpmLink: "https://dpm.lol/player/goyonx"
   },
   {
-    name: "Mehdi",
-    catchphrase: "je suis la pour etre devant les personne qui normalise le racisme et qui ne voit aucun mal a etre amis avec eux",
-    peakElo: "Emeraude 3",
-    objective: "Emeraude 4",
-    dpmLink: "https://dpm.lol/player/stormcaller"
-  } , {
-    name: "Thomus",
-    catchphrase: " la fraude - cc moi c’est la fraude, je suis la pour démontrer que plusieurs personnes dans ce Discord sont des fraudes et qu’ils ne méritent pas leur elo de boosted",
-    peakElo: "Diamant 4",
-    objective: "Gold 4",
-    dpmLink: "https://dpm.lol/player/firespirit"
-  }, {
-    name: "Javier",
-    catchphrase: "VNOLLS WHERE ARE YOU ",
-    peakElo: "?",
-    objective: "Bronze 1",
-    dpmLink: "https://dpm.lol/player/firespirit"
-  }, {
-    name: "Housmi",
-    catchphrase: "I WILL TRADE",
-    peakElo: "Emeraude 3",
-    objective: "Top 5 du challenge",
-    dpmLink: "https://dpm.lol/player/firespirit"
-  }, {
     name: "Ivyshade",
     catchphrase: "macacos fuegos - je flame pas, je bruuule",
     peakElo: "Gold",
     objective: "Platinum",
-    dpmLink: "https://dpm.lol/player/firespirit"
-  }, {
-    name: "Kryzen",
-    catchphrase: "la chienneté en lacoste ",
-    peakElo: "Emeraude 1",
-    objective: "Emeraude 3",
-    dpmLink: "https://dpm.lol/player/firespirit"
-  }, {
-    name: "Reis",
-    catchphrase: "Mes chaînes brisent les hauts gradés , l’émeraude n’est qu’une formalité",
-    peakElo: "Platinum 2",
-    objective: "Emeraude",
-    dpmLink: "https://dpm.lol/player/firespirit"
-  }, {
-    name: "Kiro",
-    catchphrase: "Road to Iron 4",
-    peakElo: "Platinum 3",
-    objective: "Gold 2",
-    dpmLink: "https://dpm.lol/player/firespirit"
-  },{
-    name: "Very Angry Cat",
-    catchphrase: "77% chat 33% sel grind 110% excrémentiel",
-    peakElo: "Diamant 3",
-    objective: "Platinum",
-    dpmLink: "https://dpm.lol/player/firespirit"
-  },{
-    name: "Naos",
-    catchphrase: "mounirmoons#keelb",
-    peakElo: "Platinum 4",
-    objective: "Emeraude",
-    dpmLink: "https://dpm.lol/player/firespirit"
-  },{
+    dpmLink: "https://dpm.lol/player/ivyshade"
+  },
+  {
     name: "Dayen",
     catchphrase: "",
     peakElo: "",
     objective: "",
-    dpmLink: "https://dpm.lol/player/firespirit"
-  },{
-    name: "Wazaks",
-    catchphrase: "Id0ntgankbot",
-    peakElo: "Emeraude 3",
-    objective: "Platinum 4",
-    dpmLink: "https://dpm.lol/player/firespirit"
-  },{
-    name: "Lastells",
-    catchphrase: "rhamen la pas ou jte dose",
-    peakElo: "Platinum 4",
-    objective: "Platinum 4",
-    dpmLink: "https://dpm.lol/player/firespirit"
-  },{
-    name: "Scar",
-    catchphrase: "",
-    peakElo: "Diamant 4",
-    objective: "Emeraude 4",
-    dpmLink: "https://dpm.lol/player/firespirit"
-  },{
-    name: "Jessim",
-    catchphrase: "ZAcOnly",
-    peakElo: "Platinum 2",
-    objective: "Emeraude 1 - Diamant 4",
-    dpmLink: "https://dpm.lol/player/firespirit"
+    dpmLink: "https://dpm.lol/player/dayen"
   },
+  {
+    name: "Javier",
+    catchphrase: "VNOLLS WHERE ARE YOU ",
+    peakElo: "?",
+    objective: "Bronze 1",
+    dpmLink: "https://dpm.lol/player/javier"
+  }
 ];
 
 export default function ParticipantsPage() {
