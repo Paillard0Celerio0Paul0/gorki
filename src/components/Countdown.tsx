@@ -49,6 +49,11 @@ export default function Countdown() {
         <h1 className="text-5xl md:text-7xl font-bold mb-6 text-white opacity-0 animate-fade-in text-shadow-glow font-dogelica">
           Gorki SoloQ Challenge
         </h1>
+        <div className="opacity-0 animate-fade-in-delay">
+          <span className="inline-block px-4 py-2 bg-yellow-400/20 text-yellow-400 font-bold font-dogelica rounded-lg border border-yellow-400/30 text-lg">
+            Du 1 Octobre 20h00 au 8 Janvier
+          </span>
+        </div>
       </div>
 
       <div className="relative z-10 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
