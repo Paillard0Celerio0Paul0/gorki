@@ -21,7 +21,7 @@ const participants = [
   {
     name: "Taouil",
     catchphrase: "Canapé gaming",
-    peakElo: "Platinum 2 ",
+    peakElo: "Platinum 2",
     objective: "Emeraude 2",
     dpmLink: "https://dpm.lol/player/lightningbolt"
   },
@@ -127,9 +127,9 @@ const participants = [
     dpmLink: "https://dpm.lol/player/firespirit"
   },{
     name: "Lastells",
-    catchphrase: "",
-    peakElo: "",
-    objective: "",
+    catchphrase: "rhamen la pas ou jte dose",
+    peakElo: "Platinum 4",
+    objective: "Platinum 4",
     dpmLink: "https://dpm.lol/player/firespirit"
   },{
     name: "Scar",
