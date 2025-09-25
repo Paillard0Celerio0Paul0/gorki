@@ -19,7 +19,7 @@ const participants = [
     dpmLink: "https://dpm.lol/player/shadowstrike"
   },
   {
-    name: "Tawil",
+    name: "Taouil",
     catchphrase: "Canapé gaming",
     peakElo: "Platinum 2 ",
     objective: "Emeraude 2",
