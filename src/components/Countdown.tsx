@@ -40,7 +40,7 @@ export default function Countdown() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-black text-white relative overflow-hidden">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-black text-white relative overflow-hidden pt-16">
       {/* Effet de particules sombres en arrière-plan */}
       <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black opacity-90"></div>
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,0,0,0.8),transparent_70%)]"></div>
