@@ -19,7 +19,7 @@ export default function Navigation() {
           <div className="flex space-x-8">
             <Link
               href="/participants"
-              className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
+              className={`px-3 py-2 rounded-md text-sm font-medium font-dogelica transition-colors duration-200 ${
                 pathname === '/participants'
                   ? 'text-white bg-gray-800/50'
                   : 'text-gray-300 hover:text-white hover:bg-gray-800/30'
@@ -29,7 +29,7 @@ export default function Navigation() {
             </Link>
             <Link
               href="/regles"
-              className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
+              className={`px-3 py-2 rounded-md text-sm font-medium font-dogelica transition-colors duration-200 ${
                 pathname === '/regles'
                   ? 'text-white bg-gray-800/50'
                   : 'text-gray-300 hover:text-white hover:bg-gray-800/30'
