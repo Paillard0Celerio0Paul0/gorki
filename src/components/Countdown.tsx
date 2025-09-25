@@ -46,44 +46,44 @@ export default function Countdown() {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,0,0,0.8),transparent_70%)]"></div>
       
       <div className="relative z-10 text-center mb-12">
-        <h1 className="text-5xl md:text-7xl font-bold mb-6 text-white opacity-0 animate-fade-in text-shadow-glow">
+        <h1 className="text-5xl md:text-7xl font-bold mb-6 text-white opacity-0 animate-fade-in text-shadow-glow font-dogelica">
           Gorki SoloQ Challenge
         </h1>
       </div>
 
       <div className="relative z-10 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
         <div className="bg-black/60 backdrop-blur-sm rounded-xl p-6 md:p-8 text-center border border-gray-800/50 opacity-0 animate-fade-in-delay-2 shadow-2xl hover:border-gray-700/70 transition-all duration-300">
-          <div className="text-4xl md:text-6xl font-bold text-white mb-2 font-mono text-shadow-glow">
+          <div className="text-4xl md:text-6xl font-bold text-white mb-2 font-dogelica text-shadow-glow">
             {timeLeft.days.toString().padStart(2, '0')}
           </div>
-          <div className="text-sm md:text-lg text-gray-500 font-medium">
+          <div className="text-sm md:text-lg text-gray-500 font-medium font-dogelica">
             Jours
           </div>
         </div>
 
         <div className="bg-black/60 backdrop-blur-sm rounded-xl p-6 md:p-8 text-center border border-gray-800/50 opacity-0 animate-fade-in-delay-3 shadow-2xl hover:border-gray-700/70 transition-all duration-300">
-          <div className="text-4xl md:text-6xl font-bold text-white mb-2 font-mono text-shadow-glow">
+          <div className="text-4xl md:text-6xl font-bold text-white mb-2 font-dogelica text-shadow-glow">
             {timeLeft.hours.toString().padStart(2, '0')}
           </div>
-          <div className="text-sm md:text-lg text-gray-500 font-medium">
+          <div className="text-sm md:text-lg text-gray-500 font-medium font-dogelica">
             Heures
           </div>
         </div>
 
         <div className="bg-black/60 backdrop-blur-sm rounded-xl p-6 md:p-8 text-center border border-gray-800/50 opacity-0 animate-fade-in-delay-4 shadow-2xl hover:border-gray-700/70 transition-all duration-300">
-          <div className="text-4xl md:text-6xl font-bold text-white mb-2 font-mono text-shadow-glow">
+          <div className="text-4xl md:text-6xl font-bold text-white mb-2 font-dogelica text-shadow-glow">
             {timeLeft.minutes.toString().padStart(2, '0')}
           </div>
-          <div className="text-sm md:text-lg text-gray-500 font-medium">
+          <div className="text-sm md:text-lg text-gray-500 font-medium font-dogelica">
             Minutes
           </div>
         </div>
 
         <div className="bg-black/60 backdrop-blur-sm rounded-xl p-6 md:p-8 text-center border border-gray-800/50 opacity-0 animate-fade-in-delay-5 shadow-2xl hover:border-gray-700/70 transition-all duration-300">
-          <div className="text-4xl md:text-6xl font-bold text-white mb-2 font-mono text-shadow-glow">
+          <div className="text-4xl md:text-6xl font-bold text-white mb-2 font-dogelica text-shadow-glow">
             {timeLeft.seconds.toString().padStart(2, '0')}
           </div>
-          <div className="text-sm md:text-lg text-gray-500 font-medium">
+          <div className="text-sm md:text-lg text-gray-500 font-medium font-dogelica">
             Secondes
           </div>
         </div>
