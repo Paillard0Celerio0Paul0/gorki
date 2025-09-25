@@ -173,7 +173,7 @@ export default function ParticipantsPage() {
                 catchphrase={participant.catchphrase}
                 peakElo={participant.peakElo}
                 objective={participant.objective}
-                dpmLink={participant.dpmLink}
+                // dpmLink={participant.dpmLink}
               />
             </div>
           ))}
