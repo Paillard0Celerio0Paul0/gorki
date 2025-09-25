@@ -27,7 +27,7 @@ const participants = [
   },
   {
     name: "Very Angry Cat",
-    catchphrase: "77% chat 33% sel grind 110% excrémentiel",
+    catchphrase: "66% chat 33% sel grind 100% gainé",
     peakElo: "Diamant 3",
     objective: "Platinum",
     dpmLink: "https://dpm.lol/player/veryangrycat"
