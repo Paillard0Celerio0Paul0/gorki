@@ -3,7 +3,7 @@ interface PlayerCardProps {
   catchphrase: string;
   peakElo: string;
   objective: string;
-  dpmLink: string;
+  // dpmLink: string;
 }
 
 export default function PlayerCard({ 
@@ -11,7 +11,7 @@ export default function PlayerCard({
   catchphrase, 
   peakElo, 
   objective, 
-  dpmLink 
+  // dpmLink 
 }: PlayerCardProps) {
   return (
     <div className="bg-black/60 backdrop-blur-sm rounded-xl p-6 border border-gray-800/50 shadow-2xl hover:border-gray-700/70 transition-all duration-300 hover:shadow-3xl h-full flex flex-col">
