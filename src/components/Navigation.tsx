@@ -27,6 +27,16 @@ export default function Navigation() {
             >
               Participants
             </Link>
+            <Link
+              href="/regles"
+              className={`px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 ${
+                pathname === '/regles'
+                  ? 'text-white bg-gray-800/50'
+                  : 'text-gray-300 hover:text-white hover:bg-gray-800/30'
+              }`}
+            >
+              Règles
+            </Link>
           </div>
         </div>
       </div>
