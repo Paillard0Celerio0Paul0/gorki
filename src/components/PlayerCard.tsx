@@ -23,7 +23,7 @@ export default function PlayerCard({
         
         {/* Phrase d'accroche */}
         <p className="text-gray-400 italic mb-4 text-sm min-h-[2.5rem] flex items-center justify-center">
-          "{catchphrase}"
+          &ldquo;{catchphrase}&rdquo;
         </p>
         
         {/* Peak Elo */}
