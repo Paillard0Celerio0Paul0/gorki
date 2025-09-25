@@ -68,6 +68,13 @@ const participants = [
     dpmLink: "https://dpm.lol/player/wazaks"
   },
   {
+    name: "Mehdi",
+    catchphrase: "je suis la pour etre devant les personne qui normalise le racisme et qui ne voit aucun mal a etre amis avec eux",
+    peakElo: "Emeraude 3",
+    objective: "Emeraude 4",
+    dpmLink: "https://dpm.lol/player/wazaks"
+  },
+  {
     name: "Taouil",
     catchphrase: "Canapé gaming",
     peakElo: "Platinum 2",

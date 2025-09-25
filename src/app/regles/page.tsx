@@ -11,7 +11,6 @@ export default function ReglesPage() {
           </h1>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
             Découvrez les règles officielles du Gorki SoloQ Challenge. 
-            Respectez ces conditions pour participer au défi.
           </p>
         </div>
 
