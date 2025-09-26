@@ -6,7 +6,7 @@ import PlayerCard from '@/components/PlayerCard';
 const participants = [
   {
     name: "Ebzi",
-    catchphrase: "",
+    catchphrase: "Top 1 ou la MORT",
     peakElo: "Master 180 LP",
     objective: "Master",
     dpmLink: "https://dpm.lol/player/ebzi"
@@ -68,7 +68,7 @@ const participants = [
     dpmLink: "https://dpm.lol/player/wazaks"
   },
   {
-    name: "Mehdi",
+    name: "Tchoupy",
     catchphrase: "je suis la pour etre devant les personne qui normalise le racisme et qui ne voit aucun mal a etre amis avec eux",
     peakElo: "Emeraude 3",
     objective: "Emeraude 4",
