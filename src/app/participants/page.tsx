@@ -13,7 +13,7 @@ const participants = [
   },
   {
     name: "Rhaaamen",
-    catchphrase: "Annihiliation",
+    catchphrase: "The Reaper",
     peakElo: "Master 70 LP",
     objective: "Master",
     dpmLink: "https://dpm.lol/player/rhaaamen"
@@ -48,7 +48,7 @@ const participants = [
   },
   {
     name: "Kryzen",
-    catchphrase: "la chienneté en lacoste ",
+    catchphrase: "la chienneté en lacoste",
     peakElo: "Emeraude 1",
     objective: "Emeraude 3",
     dpmLink: "https://dpm.lol/player/kryzen"
