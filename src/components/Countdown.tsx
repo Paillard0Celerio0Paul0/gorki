@@ -46,7 +46,7 @@ export default function Countdown() {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,0,0,0.8),transparent_70%)]"></div>
       
       <div className="relative z-10 text-center mb-12">
-        <h1 className="text-5xl md:text-7xl font-bold mb-6 text-white opacity-0 animate-fade-in text-shadow-glow font-dogelica">
+        <h1 className="text-3xl md:text-7xl font-bold mb-6 text-white opacity-0 animate-fade-in text-shadow-glow font-dogelica">
           Gorki SoloQ Challenge
         </h1>
         <div className="opacity-0 animate-fade-in-delay">
