@@ -118,7 +118,7 @@ const participants = [
   },
   {
     name: "Tiz",
-    catchphrase: "Meilleur garen du serveur",
+    catchphrase: "La justice de Demacia triomphera, des têtes tomberont.",
     peakElo: "Platinum 4",
     objective: "High Gold",
     dpmLink: "https://dpm.lol/player/tiz"
@@ -131,19 +131,26 @@ const participants = [
     dpmLink: "https://dpm.lol/player/goyonx"
   },
   {
+    name: "Casser",
+    catchphrase: "JaxSparow",
+    peakElo: "Gold 3",
+    objective: "Plat 4",
+    dpmLink: "https://dpm.lol/player/dayen"
+  },  {
+    name: "Escanor38",
+    catchphrase: "",
+    peakElo: "Gold 3",
+    objective: "?",
+    dpmLink: "https://dpm.lol/player/dayen"
+  },
+  {
     name: "Ivyshade",
     catchphrase: "macacos fuegos - je flame pas, je bruuule",
     peakElo: "Gold",
     objective: "Platinum",
     dpmLink: "https://dpm.lol/player/ivyshade"
   },
-  {
-    name: "Dayen",
-    catchphrase: "",
-    peakElo: "",
-    objective: "",
-    dpmLink: "https://dpm.lol/player/dayen"
-  },
+ 
   {
     name: "Javier",
     catchphrase: "VNOLLS WHERE ARE YOU ",
