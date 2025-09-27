@@ -34,7 +34,7 @@ const participants = [
   },
   {
     name: "Thomus",
-    catchphrase: " la fraude - cc moi c'est la fraude, je suis la pour démontrer que plusieurs personnes dans ce Discord sont des fraudes et qu'ils ne méritent pas leur elo de boosted",
+    catchphrase: "la fraude - cc moi c'est la fraude, je suis la pour démontrer que plusieurs personnes dans ce Discord sont des fraudes et qu'ils ne méritent pas leur elo de boosted",
     peakElo: "Diamant 4",
     objective: "Gold 4",
     dpmLink: "https://dpm.lol/player/thomus"
@@ -138,9 +138,9 @@ const participants = [
     dpmLink: "https://dpm.lol/player/dayen"
   },  {
     name: "Escanor38",
-    catchphrase: "",
+    catchphrase: "Sett pain dans la tête avant de te dire mes 4 vérités",
     peakElo: "Gold 3",
-    objective: "?",
+    objective: "Gold 1",
     dpmLink: "https://dpm.lol/player/dayen"
   },
   {
@@ -150,7 +150,6 @@ const participants = [
     objective: "Platinum",
     dpmLink: "https://dpm.lol/player/ivyshade"
   },
- 
   {
     name: "Javier",
     catchphrase: "VNOLLS WHERE ARE YOU ",
