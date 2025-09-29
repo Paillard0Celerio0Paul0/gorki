@@ -72,7 +72,7 @@ const participants = [
     catchphrase: "je suis la pour etre devant les personne qui normalise le racisme et qui ne voit aucun mal a etre amis avec eux",
     peakElo: "Emeraude 3",
     objective: "Emeraude 4",
-    dpmLink: ""
+    dpmLink: "https://dpm.lol/RhamenLover-MSN"
   },
   {
     name: "Simba",
