@@ -128,7 +128,7 @@ const participants = [
     catchphrase: "Better than Housmi",
     peakElo: "Gold 1",
     objective: "Platinum 4",
-    dpmLink: ""
+    dpmLink: "https://dpm.lol/BetterThanHousmi-8620"
   },
   {
     name: "Casser",
