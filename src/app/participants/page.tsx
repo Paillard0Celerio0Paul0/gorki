@@ -162,7 +162,7 @@ const participants = [
     catchphrase: "VNOLLS WHERE ARE YOU ",
     peakElo: "?",
     objective: "Bronze 1",
-    dpmLink: ""
+    dpmLink: "https://dpm.lol/Javier%20Master-667"
   }
 ];
 
