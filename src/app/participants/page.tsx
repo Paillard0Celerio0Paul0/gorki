@@ -144,6 +144,13 @@ const participants = [
     dpmLink: ""
   },
   {
+    name: "Timhor",
+    catchphrase: "El Senor de la noche",
+    peakElo: "Gold 4",
+    objective: "?",
+    dpmLink: ""
+  },
+  {
     name: "Ivyshade",
     catchphrase: "macacos fuegos - je flame pas, je bruuule",
     peakElo: "Gold",
