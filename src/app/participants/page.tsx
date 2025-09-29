@@ -51,7 +51,7 @@ const participants = [
     catchphrase: "la chienneté en lacoste",
     peakElo: "Emeraude 1",
     objective: "Emeraude 3",
-    dpmLink: ""
+    dpmLink: "https://dpm.lol/Mid150Unleashed%20-MIDIF"
   },
   {
     name: "Housmi",
