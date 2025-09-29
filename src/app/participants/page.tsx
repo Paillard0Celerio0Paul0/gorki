@@ -30,7 +30,7 @@ const participants = [
     catchphrase: "66% chat 33% sel 100% gainé",
     peakElo: "Diamant 3 60LP",
     objective: "Platinum",
-    dpmLink: ""
+    dpmLink: "https://dpm.lol/isolated%20Q-kha"
   },
   {
     name: "Thomus",
