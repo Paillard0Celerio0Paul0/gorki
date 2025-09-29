@@ -163,7 +163,7 @@ const participants = [
     catchphrase: "macacos fuegos - je flame pas, je bruuule",
     peakElo: "Gold",
     objective: "Platinum",
-    dpmLink: ""
+    dpmLink: "https://dpm.lol/Dr%20Poulet-kiwi"
   },
   {
     name: "Javier",
