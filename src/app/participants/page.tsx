@@ -107,21 +107,21 @@ const participants = [
     catchphrase: "PiouPiou Ratatatata",
     peakElo: "Je compte pas le peak émeraude 4 donc mon peak c'est plat 3 max je crois",
     objective: "Platinum 4",
-    dpmLink: ""
+    dpmLink: "https://dpm.lol/ASCEND%20-OUI"
   },
   {
     name: "Lastells",
     catchphrase: "rhamen la pas ou jte dose",
     peakElo: "Platinum 4",
     objective: "Platinum 4",
-    dpmLink: ""
+    dpmLink: "https://dpm.lol/COMME%20UN%20HOMME-GAREN"
   },
   {
     name: "Tiz",
     catchphrase: "La justice de Demacia triomphera, des têtes tomberont.",
     peakElo: "Platinum 4",
     objective: "High Gold",
-    dpmLink: ""
+    dpmLink: "https://dpm.lol/COMME%20UN%20HOMME-GAREN"
   },
   {
     name: "Goyonx",
@@ -136,7 +136,8 @@ const participants = [
     peakElo: "Gold 3",
     objective: "Plat 4",
     dpmLink: ""
-  },  {
+  },  
+  {
     name: "Escanor38",
     catchphrase: "Sett pain dans la tête avant de te dire mes 4 vérités",
     peakElo: "Gold 3",
