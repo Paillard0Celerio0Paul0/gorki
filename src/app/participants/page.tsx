@@ -114,7 +114,7 @@ const participants = [
     catchphrase: "rhamen la pas ou jte dose",
     peakElo: "Platinum 4",
     objective: "Platinum 4",
-    dpmLink: "https://dpm.lol/COMME%20UN%20HOMME-GAREN"
+    dpmLink: "https://dpm.lol/Eliatheda-EUW"
   },
   {
     name: "Tiz",
