@@ -93,7 +93,7 @@ const participants = [
     catchphrase: "ZAcOnly",
     peakElo: "Platinum 2",
     objective: "Emeraude 1 - Diamant 4",
-    dpmLink: ""
+    dpmLink: "https://dpm.lol/ZacOnly-38800"
   },
   {
     name: "Reis",
