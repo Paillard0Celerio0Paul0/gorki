@@ -100,7 +100,7 @@ const participants = [
     catchphrase: "Road to Iron 4",
     peakElo: "Platinum 3",
     objective: "Gold 2",
-    dpmLink: ""
+    dpmLink: "https://dpm.lol/Michto%20Fortune-moula"
   },
   {
     name: "Ronron",
