@@ -48,7 +48,7 @@ export default function PlayerCard({
             href={dpmLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center px-4 py-2 bg-blue-600/80 hover:bg-blue-600 text-white text-sm font-medium rounded-lg transition-colors duration-200 border border-blue-500/50 hover:border-blue-400 mt-auto"
+            className="inline-flex items-center px-4 py-2 bg-yellow-400/80 hover:bg-yellow-400 text-black text-sm font-medium rounded-lg transition-colors duration-200 border border-yellow-400/50 hover:border-yellow-300 mt-auto"
           >
             <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
               <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
