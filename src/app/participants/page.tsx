@@ -79,7 +79,7 @@ const participants = [
     catchphrase: "meilleur que la team st 100%",
     peakElo: "Emeraude",
     objective: "Diamant",
-    dpmLink: ""
+    dpmLink: "https://dpm.lol/Bassem69200Hlib-69200"
   },
   {
     name: "Taouil",
