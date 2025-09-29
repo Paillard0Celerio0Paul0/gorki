@@ -75,6 +75,13 @@ const participants = [
     dpmLink: ""
   },
   {
+    name: "Simba",
+    catchphrase: "meilleur que la team st 100%",
+    peakElo: "Emeraude",
+    objective: "Diamant",
+    dpmLink: ""
+  },
+  {
     name: "Taouil",
     catchphrase: "Canapé gaming",
     peakElo: "Platinum 2",
