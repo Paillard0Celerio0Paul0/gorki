@@ -149,7 +149,7 @@ const participants = [
     catchphrase: "Sett pain dans la tête avant de te dire mes 4 vérités",
     peakElo: "Gold 3",
     objective: "Gold 1",
-    dpmLink: ""
+    dpmLink: "https://dpm.lol/3D2Y-3753"
   },
   {
     name: "Timhor",
