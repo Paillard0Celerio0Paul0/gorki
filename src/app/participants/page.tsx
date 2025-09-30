@@ -156,7 +156,7 @@ const participants = [
     catchphrase: "El Senor de la noche",
     peakElo: "Gold 4",
     objective: "?",
-    dpmLink: ""
+    dpmLink: "https://dpm.lol/Michele%20de%20Feur-8032"
   },
   {
     name: "Ivyshade",
