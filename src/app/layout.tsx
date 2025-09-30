@@ -23,6 +23,11 @@ const orbitron = Orbitron({
 export const metadata: Metadata = {
   title: "Gorki SoloQ Challenge",
   description: "Décompte jusqu'au Gorki SoloQ Challenge",
+  icons: {
+    icon: '/favicon.svg',
+    shortcut: '/favicon.svg',
+    apple: '/favicon.svg',
+  },
 };
 
 export default function RootLayout({
