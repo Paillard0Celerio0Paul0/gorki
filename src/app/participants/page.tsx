@@ -23,7 +23,7 @@ const participants = [
     catchphrase: "Undeserved diamond",
     peakElo: "Diamant 1 BO Master",
     objective: "Diamant 4",
-    dpmLink: ""
+    dpmLink: "https://dpm.lol/FrozenThrall-ICE"
   },
   {
     name: "Very Angry Cat",
