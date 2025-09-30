@@ -124,6 +124,13 @@ const participants = [
     dpmLink: "https://dpm.lol/ptitedose-6346"
   },
   {
+    name: "Naos",
+    catchphrase: "mounirmoons#keelb",
+    peakElo: "Platinum 4",
+    objective: "Emeraude 4",
+    dpmLink: ""
+  },
+  {
     name: "Tiz",
     catchphrase: "La justice de Demacia triomphera, des têtes tomberont.",
     peakElo: "Platinum 4",
