@@ -86,7 +86,7 @@ const participants = [
     catchphrase: "Canapé gaming",
     peakElo: "Platinum 2",
     objective: "Emeraude 2",
-    dpmLink: ""
+    dpmLink: "https://dpm.lol/Canap%C3%A9%20Player-Couch"
   },
   {
     name: "Jessim",
@@ -121,7 +121,7 @@ const participants = [
     catchphrase: "rhamen la pas ou jte dose",
     peakElo: "Platinum 4",
     objective: "Platinum 4",
-    dpmLink: "https://dpm.lol/Eliatheda-EUW"
+    dpmLink: "https://dpm.lol/ptitedose-6346"
   },
   {
     name: "Tiz",
