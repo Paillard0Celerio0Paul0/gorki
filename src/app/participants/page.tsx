@@ -50,7 +50,7 @@ const participants = [
     name: "Kryzen",
     catchphrase: "la chienneté en lacoste",
     peakElo: "Emeraude 1",
-    objective: "Emeraude 3",
+    objective: "Emeraude 4",
     dpmLink: "https://dpm.lol/Mid150Unleashed%20-MIDIF"
   },
   {
