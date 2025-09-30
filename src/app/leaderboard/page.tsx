@@ -1,5 +1,7 @@
 'use client';
 
+import Link from 'next/link';
+
 export default function LeaderboardPage() {
   return (
     <div className="min-h-screen bg-black text-white pt-20">
@@ -29,12 +31,12 @@ export default function LeaderboardPage() {
 
         {/* Bouton retour */}
         <div className="text-center mt-8">
-          <a 
+          <Link 
             href="/"
             className="inline-block px-6 py-3 bg-yellow-400/20 text-yellow-400 font-bold font-dogelica rounded-lg border border-yellow-400/30 hover:bg-yellow-400/30 hover:text-yellow-300 transition-all duration-300"
           >
-            ← Retour à l'accueil
-          </a>
+            ← Retour à l&apos;accueil
+          </Link>
         </div>
       </div>
     </div>
