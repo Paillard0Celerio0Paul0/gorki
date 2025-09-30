@@ -37,7 +37,7 @@ const participants = [
     catchphrase: "la fraude - cc moi c'est la fraude, je suis la pour démontrer que plusieurs personnes dans ce Discord sont des fraudes et qu'ils ne méritent pas leur elo de boosted",
     peakElo: "Diamant 4",
     objective: "Gold 4",
-    dpmLink: ""
+    dpmLink: "https://dpm.lol/la%20fraude-IMPOT"
   },
   {
     name: "Scar",
