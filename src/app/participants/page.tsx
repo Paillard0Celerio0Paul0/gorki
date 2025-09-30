@@ -100,7 +100,7 @@ const participants = [
     catchphrase: "Mes chaînes brisent les hauts gradés , l'émeraude n'est qu'une formalité",
     peakElo: "Platinum 2",
     objective: "Emeraude",
-    dpmLink: ""
+    dpmLink: "https://dpm.lol/SirHassanDiff-20773"
   },
   {
     name: "Kiro",
