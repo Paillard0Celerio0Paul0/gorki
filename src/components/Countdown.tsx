@@ -49,9 +49,7 @@ export default function Countdown() {
         <div className="mb-8 opacity-0 animate-fade-in">
           <div className="flex items-center justify-center gap-3">
             <a 
-              href="https://dpm.lol/leaderboards/394c41bf-ee61-48b1-80f3-57fa9be34951" 
-              target="_blank" 
-              rel="noopener noreferrer"
+              href="/leaderboard" 
               className="text-2xl md:text-3xl font-bold text-yellow-400 hover:text-yellow-300 transition-colors duration-300 font-dogelica text-shadow-glow"
             >
               🏆 Leaderboard DPM

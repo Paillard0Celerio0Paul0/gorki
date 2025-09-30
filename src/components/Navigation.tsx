@@ -28,6 +28,16 @@ export default function Navigation() {
               Participants
             </Link>
             <Link
+              href="/leaderboard"
+              className={`px-3 py-2 rounded-md text-sm font-medium font-dogelica transition-colors duration-200 ${
+                pathname === '/leaderboard'
+                  ? 'text-yellow-400 bg-gray-800/50'
+                  : 'text-gray-300 hover:text-yellow-400 hover:bg-gray-800/30'
+              }`}
+            >
+              🏆 Leaderboard
+            </Link>
+            <Link
               href="/regles"
               className={`px-3 py-2 rounded-md text-sm font-medium font-dogelica transition-colors duration-200 ${
                 pathname === '/regles'
