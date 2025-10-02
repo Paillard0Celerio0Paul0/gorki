@@ -137,9 +137,16 @@ export default function PredictionsLeaderboardPage() {
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                   <div className="flex items-center gap-3 md:gap-4">
                     <div className="text-2xl md:text-4xl">{getRankEmoji(index)}</div>
+                    {score.user?.avatar_url && (
+                      <img 
+                        src={score.user.avatar_url} 
+                        alt={`Avatar de ${score.user.username}`}
+                        className="w-8 h-8 md:w-12 md:h-12 rounded-full border-2 border-yellow-400/50"
+                      />
+                    )}
                     <div>
                       <h3 className="text-lg md:text-xl font-bold text-white font-dogelica">
-                        Joueur #{score.user_id.slice(-4)}
+                        {score.user?.username || `Joueur #${score.user_id.slice(-4)}`}
                       </h3>
                       <p className="text-xs md:text-sm text-gray-400">
                         {getRankTitle(score.accuracy_percentage)} • {score.daily_total + score.weekly_total} prédictions
@@ -167,9 +174,16 @@ export default function PredictionsLeaderboardPage() {
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                   <div className="flex items-center gap-3 md:gap-4">
                     <div className="text-base md:text-lg text-gray-400">#{index + 4}</div>
+                    {score.user?.avatar_url && (
+                      <img 
+                        src={score.user.avatar_url} 
+                        alt={`Avatar de ${score.user.username}`}
+                        className="w-6 h-6 md:w-8 md:h-8 rounded-full border border-gray-600/50"
+                      />
+                    )}
                     <div>
                       <h4 className="text-base md:text-lg font-bold text-white font-dogelica">
-                        Joueur #{score.user_id.slice(-4)}
+                        {score.user?.username || `Joueur #${score.user_id.slice(-4)}`}
                       </h4>
                       <p className="text-xs md:text-sm text-gray-400">
                         {getRankTitle(score.accuracy_percentage)} • {score.daily_total + score.weekly_total} prédictions
