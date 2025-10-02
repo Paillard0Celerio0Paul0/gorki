@@ -65,6 +65,7 @@ export interface PredictionWithVotingStatus extends Prediction {
 }
 
 export interface UserScore {
+  user: any;
   user_id: string;
   daily_correct: number;
   daily_total: number;
