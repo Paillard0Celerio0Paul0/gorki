@@ -49,7 +49,6 @@ export default function PredictionsLeaderboardPage() {
   };
 
   const getRankTitle = (accuracy: number) => {
-    if (accuracy >= 90) return 'Prophète';
     if (accuracy >= 80) return 'Oracle';
     if (accuracy >= 70) return 'Prédicteur';
     if (accuracy >= 60) return 'Visionnaire';
@@ -88,7 +87,7 @@ export default function PredictionsLeaderboardPage() {
               onClick={() => setSortBy('points')}
               className={`w-1/2 px-3 md:px-4 py-2 rounded-lg font-dogelica transition-colors duration-200 text-sm md:text-base ${
                 sortBy === 'points'
-                  ? 'bg-yellow-600 text-white'
+                  ? 'bg-yellow-600 tex t-white'
                   : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
               }`}
             >
