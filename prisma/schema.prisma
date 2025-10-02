@@ -1,0 +1,135 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("POSTGRES_PRISMA_URL")
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id            String    @id @default(cuid())
+  discord_id    String    @unique
+  username      String
+  email         String?   // Ajouté pour NextAuth
+  avatar_url    String?
+  is_admin      Boolean   @default(false)
+  created_at    DateTime  @default(now())
+  accounts      Account[]
+  sessions      Session[]
+  predictions   Prediction[]
+  validated_predictions Prediction[] @relation("PredictionValidator")
+  mentioned_in_predictions Prediction[] @relation("PredictionMentioned")
+  votes         Vote[]
+  scores        UserScore[]
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model Prediction {
+  id             String          @id @default(cuid())
+  text           String
+  type           PredictionType
+  points         Int             // 1 pour journalière, 3 pour hebdomadaire
+  created_by     String
+  created_at     DateTime        @default(now())
+  is_validated   Boolean         @default(false)
+  correct_answer Boolean?
+  validated_at   DateTime?
+  validated_by   String?
+  
+  // Pour les prédictions journalières
+  day            DateTime?       // Date spécifique (null pour hebdomadaires)
+  
+  // Pour les prédictions hebdomadaires
+  week_start     DateTime?       // Début de semaine (lundi)
+  week_end       DateTime?       // Fin de semaine (dimanche)
+  
+  // Statut de vote
+  voting_open    Boolean         @default(true)   // Les votes sont-ils ouverts ?
+  voting_closes_at DateTime?     // Fermeture des votes (23h59 pour journalières, dimanche pour hebdomadaires)
+  
+  // Utilisateur mentionné dans la prédiction (optionnel)
+  mentioned_user_id String?      // ID de l'utilisateur mentionné
+  
+  creator        User            @relation(fields: [created_by], references: [id])
+  validator      User?           @relation("PredictionValidator", fields: [validated_by], references: [id])
+  mentioned_user User?           @relation("PredictionMentioned", fields: [mentioned_user_id], references: [id])
+  votes          Vote[]
+  
+  // Index pour optimiser les requêtes
+  @@index([type, day])
+  @@index([type, week_start, week_end])
+  @@index([voting_open, voting_closes_at])
+}
+
+enum PredictionType {
+  DAILY    // Journalière - 1 point
+  WEEKLY   // Hebdomadaire - 3 points
+}
+
+model Vote {
+  id            String      @id @default(cuid())
+  prediction_id String
+  user_id       String
+  vote          Boolean     // true = OUI/VRAI, false = NON/FAUX
+  created_at    DateTime    @default(now())
+  updated_at    DateTime    @updatedAt // Permet de modifier le vote jusqu'à la fermeture
+  
+  prediction    Prediction  @relation(fields: [prediction_id], references: [id], onDelete: Cascade)
+  user          User        @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@unique([prediction_id, user_id]) // Un seul vote par utilisateur par prédiction
+  @@index([user_id, created_at])     // Optimiser les requêtes par utilisateur
+}
+
+model UserScore {
+  id                    String   @id @default(cuid())
+  user_id               String   @unique
+  daily_correct         Int      @default(0)
+  daily_total           Int      @default(0)
+  weekly_correct        Int      @default(0)
+  weekly_total          Int      @default(0)
+  total_points_earned   Int      @default(0)
+  total_points_possible Int      @default(0)
+  accuracy_percentage   Float    @default(0.0)
+  last_updated          DateTime @default(now())
+  
+  user                  User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  
+  @@index([total_points_earned]) // Pour le classement
+  @@index([accuracy_percentage]) // Pour le classement par précision
+}

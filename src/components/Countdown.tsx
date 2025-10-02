@@ -1,6 +1,9 @@
 'use client';
 
+import { useSession } from "next-auth/react";
+
 export default function Countdown() {
+  const { data: session, status } = useSession();
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-black text-white relative overflow-hidden pt-16">
@@ -64,18 +67,38 @@ export default function Countdown() {
           </div>
         </a>
 
-        {/* Carte 3: Contenu à venir */}
-        <div className="bg-black/60 backdrop-blur-sm rounded-xl p-8 text-center border border-gray-800/50 opacity-0 animate-fade-in-delay-4 shadow-2xl hover:border-blue-500/50 hover:bg-blue-500/10 transition-all duration-300 group cursor-pointer">
-          <div className="text-6xl mb-4 group-hover:scale-110 transition-transform duration-300">
-            🔮
-          </div>
-          <div className="text-2xl md:text-3xl font-bold text-white mb-3 font-dogelica text-shadow-glow group-hover:text-blue-400 transition-colors duration-300">
-            À Venir
-          </div>
-          <div className="text-sm md:text-lg text-gray-500 font-medium font-dogelica group-hover:text-blue-300 transition-colors duration-300">
-            Du contenu exclusif bientôt disponible
-          </div>
-        </div>
+        {/* Carte 3: Prédictions ou Authentification */}
+        {session ? (
+          <a 
+            href="/predictions" 
+            className="bg-black/60 backdrop-blur-sm rounded-xl p-8 text-center border border-gray-800/50 opacity-0 animate-fade-in-delay-4 shadow-2xl hover:border-purple-500/50 hover:bg-purple-500/10 transition-all duration-300 group cursor-pointer"
+          >
+            <div className="text-6xl mb-4 group-hover:scale-110 transition-transform duration-300">
+              🔮
+            </div>
+            <div className="text-2xl md:text-3xl font-bold text-white mb-3 font-dogelica text-shadow-glow group-hover:text-purple-400 transition-colors duration-300">
+              Prédictions
+            </div>
+            <div className="text-sm md:text-lg text-gray-500 font-medium font-dogelica group-hover:text-purple-300 transition-colors duration-300">
+              Participe aux prédictions du challenge
+            </div>
+          </a>
+        ) : (
+          <a 
+            href="/auth/signin" 
+            className="bg-black/60 backdrop-blur-sm rounded-xl p-8 text-center border border-gray-800/50 opacity-0 animate-fade-in-delay-4 shadow-2xl hover:border-[#5865F2]/50 hover:bg-[#5865F2]/10 transition-all duration-300 group cursor-pointer"
+          >
+            <div className="text-6xl mb-4 group-hover:scale-110 transition-transform duration-300">
+              🔐
+            </div>
+            <div className="text-2xl md:text-3xl font-bold text-white mb-3 font-dogelica text-shadow-glow group-hover:text-[#5865F2] transition-colors duration-300">
+              Connexion
+            </div>
+            <div className="text-sm md:text-lg text-gray-500 font-medium font-dogelica group-hover:text-[#5865F2]/80 transition-colors duration-300">
+              Connecte-toi avec Discord pour participer
+            </div>
+          </a>
+        )}
       </div>
       <style jsx>{`
         @keyframes fade-in {

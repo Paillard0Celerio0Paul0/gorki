@@ -3,6 +3,8 @@ import { Geist, Geist_Mono, Orbitron } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
 import { Analytics } from "@vercel/analytics/next"
+import SessionProvider from "@/components/providers/SessionProvider"
+import UserOverlay from "@/components/UserOverlay"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,13 +38,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="fr">
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${orbitron.variable} antialiased`}
       >
-        <Navigation />
-        {children}
-        <Analytics />
+        <SessionProvider>
+          <Navigation />
+          {children}
+          <UserOverlay />
+          <Analytics />
+        </SessionProvider>
       </body>
     </html>
   );

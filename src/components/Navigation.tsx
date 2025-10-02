@@ -3,10 +3,12 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
+import { useSession } from 'next-auth/react';
 
 export default function Navigation() {
   const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { data: session } = useSession();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -37,7 +39,7 @@ export default function Navigation() {
                   : 'text-gray-300 hover:text-white hover:bg-gray-800/30'
               }`}
             >
-              Participants
+              👥 Participants
             </Link>
             <Link
               href="/leaderboard"
@@ -49,6 +51,18 @@ export default function Navigation() {
             >
               🏆 Leaderboard
             </Link>
+            {session?.user && (
+              <Link
+                href="/predictions"
+                className={`px-3 py-2 rounded-md text-sm font-medium font-dogelica transition-colors duration-200 ${
+                  pathname === '/predictions'
+                    ? 'text-purple-400 bg-gray-800/50'
+                    : 'text-gray-300 hover:text-purple-400 hover:bg-gray-800/30'
+                }`}
+              >
+                🔮 Prédictions
+              </Link>
+            )}
             <Link
               href="/regles"
               className={`px-3 py-2 rounded-md text-sm font-medium font-dogelica transition-colors duration-200 ${
@@ -57,8 +71,20 @@ export default function Navigation() {
                   : 'text-gray-300 hover:text-white hover:bg-gray-800/30'
               }`}
             >
-              Règles
+              📋 Règles
             </Link>
+            {session?.user?.is_admin && (
+              <Link
+                href="/admin/predictions"
+                className={`px-3 py-2 rounded-md text-sm font-medium font-dogelica transition-colors duration-200 ${
+                  pathname === '/admin/predictions'
+                    ? 'text-purple-400 bg-gray-800/50'
+                    : 'text-gray-300 hover:text-purple-400 hover:bg-gray-800/30'
+                }`}
+              >
+                ⚙️ Admin
+              </Link>
+            )}
           </div>
 
           {/* Bouton Hamburger Mobile */}
@@ -107,7 +133,7 @@ export default function Navigation() {
                     : 'text-gray-300 hover:text-white hover:bg-gray-800/30'
                 }`}
               >
-                Participants
+                👥 Participants
               </Link>
               <Link
                 href="/leaderboard"
@@ -120,6 +146,19 @@ export default function Navigation() {
               >
                 🏆 Leaderboard
               </Link>
+              {session?.user && (
+                <Link
+                  href="/predictions"
+                  onClick={closeMenu}
+                  className={`block px-3 py-2 rounded-md text-base font-medium font-dogelica transition-colors duration-200 ${
+                    pathname === '/predictions'
+                      ? 'text-purple-400 bg-gray-800/50'
+                      : 'text-gray-300 hover:text-purple-400 hover:bg-gray-800/30'
+                  }`}
+                >
+                  🔮 Prédictions
+                </Link>
+              )}
               <Link
                 href="/regles"
                 onClick={closeMenu}
@@ -129,8 +168,21 @@ export default function Navigation() {
                     : 'text-gray-300 hover:text-white hover:bg-gray-800/30'
                 }`}
               >
-                Règles
+                📋 Règles
               </Link>
+              {session?.user?.is_admin && (
+                <Link
+                  href="/admin/predictions"
+                  onClick={closeMenu}
+                  className={`block px-3 py-2 rounded-md text-base font-medium font-dogelica transition-colors duration-200 ${
+                    pathname === '/admin/predictions'
+                      ? 'text-purple-400 bg-gray-800/50'
+                      : 'text-gray-300 hover:text-purple-400 hover:bg-gray-800/30'
+                  }`}
+                >
+                  ⚙️ Admin
+                </Link>
+              )}
             </div>
           </div>
         )}
