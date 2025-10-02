@@ -1,43 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-
-interface TimeLeft {
-  days: number;
-  hours: number;
-  minutes: number;
-  seconds: number;
-}
-
 export default function Countdown() {
-  const [timeLeft, setTimeLeft] = useState<TimeLeft>({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-    seconds: 0
-  });
-
-  useEffect(() => {
-    const targetDate = new Date('2025-10-01T20:00:00').getTime();
-
-    const timer = setInterval(() => {
-      const now = new Date().getTime();
-      const difference = targetDate - now;
-
-      if (difference > 0) {
-        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-        setTimeLeft({ days, hours, minutes, seconds });
-      } else {
-        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-      }
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, []);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-black text-white relative overflow-hidden pt-16">
@@ -66,40 +29,51 @@ export default function Countdown() {
         </div>
       </div>
 
-      <div className="relative z-10 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-        <div className="bg-black/60 backdrop-blur-sm rounded-xl p-6 md:p-8 text-center border border-gray-800/50 opacity-0 animate-fade-in-delay-2 shadow-2xl hover:border-gray-700/70 transition-all duration-300">
-          <div className="text-4xl md:text-6xl font-bold text-white mb-2 font-dogelica text-shadow-glow">
-            {timeLeft.days.toString().padStart(2, '0')}
+      <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+        {/* Carte 1: Leaderboard */}
+        <a 
+          href="/leaderboard" 
+          className="bg-black/60 backdrop-blur-sm rounded-xl p-8 text-center border border-gray-800/50 opacity-0 animate-fade-in-delay-2 shadow-2xl hover:border-yellow-400/50 hover:bg-yellow-400/10 transition-all duration-300 group cursor-pointer"
+        >
+          <div className="text-6xl mb-4 group-hover:scale-110 transition-transform duration-300">
+            🏆
           </div>
-          <div className="text-sm md:text-lg text-gray-500 font-medium font-dogelica">
-            Jours
+          <div className="text-2xl md:text-3xl font-bold text-white mb-3 font-dogelica text-shadow-glow group-hover:text-yellow-400 transition-colors duration-300">
+            Leaderboard
           </div>
-        </div>
+          <div className="text-sm md:text-lg text-gray-500 font-medium font-dogelica group-hover:text-yellow-300 transition-colors duration-300">
+            Voir le classement des participants
+          </div>
+        </a>
 
-        <div className="bg-black/60 backdrop-blur-sm rounded-xl p-6 md:p-8 text-center border border-gray-800/50 opacity-0 animate-fade-in-delay-3 shadow-2xl hover:border-gray-700/70 transition-all duration-300">
-          <div className="text-4xl md:text-6xl font-bold text-white mb-2 font-dogelica text-shadow-glow">
-            {timeLeft.hours.toString().padStart(2, '0')}
+        {/* Carte 2: Vidéo YouTube */}
+        <a 
+          href="https://www.youtube.com/watch?v=BmtVk8R8jHA" 
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bg-black/60 backdrop-blur-sm rounded-xl p-8 text-center border border-gray-800/50 opacity-0 animate-fade-in-delay-3 shadow-2xl hover:border-red-500/50 hover:bg-red-500/10 transition-all duration-300 group cursor-pointer"
+        >
+          <div className="text-6xl mb-4 group-hover:scale-110 transition-transform duration-300">
+            📺
           </div>
-          <div className="text-sm md:text-lg text-gray-500 font-medium font-dogelica">
-            Heures
+          <div className="text-2xl md:text-3xl font-bold text-white mb-3 font-dogelica text-shadow-glow group-hover:text-red-400 transition-colors duration-300">
+            Vidéo
           </div>
-        </div>
+          <div className="text-sm md:text-lg text-gray-500 font-medium font-dogelica group-hover:text-red-300 transition-colors duration-300">
+            Regarder sur YouTube
+          </div>
+        </a>
 
-        <div className="bg-black/60 backdrop-blur-sm rounded-xl p-6 md:p-8 text-center border border-gray-800/50 opacity-0 animate-fade-in-delay-4 shadow-2xl hover:border-gray-700/70 transition-all duration-300">
-          <div className="text-4xl md:text-6xl font-bold text-white mb-2 font-dogelica text-shadow-glow">
-            {timeLeft.minutes.toString().padStart(2, '0')}
+        {/* Carte 3: Contenu à venir */}
+        <div className="bg-black/60 backdrop-blur-sm rounded-xl p-8 text-center border border-gray-800/50 opacity-0 animate-fade-in-delay-4 shadow-2xl hover:border-blue-500/50 hover:bg-blue-500/10 transition-all duration-300 group cursor-pointer">
+          <div className="text-6xl mb-4 group-hover:scale-110 transition-transform duration-300">
+            🔮
           </div>
-          <div className="text-sm md:text-lg text-gray-500 font-medium font-dogelica">
-            Minutes
+          <div className="text-2xl md:text-3xl font-bold text-white mb-3 font-dogelica text-shadow-glow group-hover:text-blue-400 transition-colors duration-300">
+            À Venir
           </div>
-        </div>
-
-        <div className="bg-black/60 backdrop-blur-sm rounded-xl p-6 md:p-8 text-center border border-gray-800/50 opacity-0 animate-fade-in-delay-5 shadow-2xl hover:border-gray-700/70 transition-all duration-300">
-          <div className="text-4xl md:text-6xl font-bold text-white mb-2 font-dogelica text-shadow-glow">
-            {timeLeft.seconds.toString().padStart(2, '0')}
-          </div>
-          <div className="text-sm md:text-lg text-gray-500 font-medium font-dogelica">
-            Secondes
+          <div className="text-sm md:text-lg text-gray-500 font-medium font-dogelica group-hover:text-blue-300 transition-colors duration-300">
+            Du contenu exclusif bientôt disponible
           </div>
         </div>
       </div>

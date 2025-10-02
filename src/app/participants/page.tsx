@@ -145,11 +145,11 @@ const participants = [
     dpmLink: "https://dpm.lol/BetterThanHousmi-8620"
   },
   {
-    name: "Casser",
+    name: "Dayen",
     catchphrase: "JaxSparow",
     peakElo: "Gold 3",
     objective: "Plat 4",
-    dpmLink: ""
+    dpmLink: "https://dpm.lol/JaxSparow3-EUWBG"
   },  
   {
     name: "Escanor38",
