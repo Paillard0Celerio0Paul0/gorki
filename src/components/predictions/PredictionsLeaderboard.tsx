@@ -78,7 +78,7 @@ export default function PredictionsLeaderboard() {
 
       <div className="space-y-3">
         {scores.map((score, index) => {
-          const isCurrentUser = session?.user?.id === score.user_id;
+          const isCurrentUser = (session as { user?: { id: string } }).user?.id === score.user_id;
           return (
             <div
               key={score.user_id}

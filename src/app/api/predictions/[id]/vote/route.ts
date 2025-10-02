@@ -10,7 +10,7 @@ export async function POST(
   try {
     const session = await getServerSession(authOptions);
     
-    if (!session?.user?.id) {
+    if (!(session as { user?: { id: string } }).user?.id) {
       return NextResponse.json(
         { error: 'Authentification requise' }, 
         { status: 401 }
@@ -58,7 +58,7 @@ export async function POST(
       where: {
         prediction_id_user_id: {
           prediction_id: predictionId,
-          user_id: session.user.id
+          user_id: (session as { user?: { id: string } }).user?.id || ''
         }
       }
     });
@@ -74,7 +74,7 @@ export async function POST(
     const userVote = await prisma.vote.create({
       data: {
         prediction_id: predictionId,
-        user_id: session.user.id,
+        user_id: (session as { user?: { id: string } }).user?.id || '',
         vote: vote
       }
     });
@@ -114,7 +114,7 @@ export async function PUT(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions);
     
-    if (!session?.user?.id) {
+    if (!(session as { user?: { id: string } }).user?.id) {
       return NextResponse.json(
         { error: 'Authentification requise' }, 
         { status: 401 }
@@ -150,7 +150,7 @@ export async function PUT(request: NextRequest) {
     // Vérifier les votes existants en batch
     const existingVotes = await prisma.vote.findMany({
       where: {
-        user_id: session.user.id,
+        user_id: (session as { user?: { id: string } }).user?.id || '',
         prediction_id: { in: predictionIds }
       },
       select: {
@@ -181,7 +181,7 @@ export async function PUT(request: NextRequest) {
       prisma.vote.create({
         data: {
           prediction_id: predictionId,
-          user_id: session.user.id,
+          user_id: (session as { user?: { id: string } }).user?.id || '',
           vote: vote
         }
       })

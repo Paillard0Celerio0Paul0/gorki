@@ -11,10 +11,10 @@ export default function UserScoreCard() {
 
   useEffect(() => {
     const fetchScore = async () => {
-      if (!session?.user?.id) return;
+      if (!(session as { user?: { id: string } }).user?.id) return;
 
       try {
-        const response = await fetch(`/api/users/${session.user.id}/score`);
+        const response = await fetch(`/api/users/${(session as { user?: { id: string } }).user?.id}/score`);
         if (response.ok) {
           const data = await response.json();
           setScore(data);

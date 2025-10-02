@@ -10,7 +10,7 @@ export async function GET(
   try {
     const session = await getServerSession(authOptions);
     
-    if (!session?.user?.id) {
+    if (!(session as { user?: { id: string } }).user?.id) {
       return NextResponse.json(
         { error: 'Authentification requise' }, 
         { status: 401 }
@@ -20,7 +20,7 @@ export async function GET(
     const { id: userId } = await params;
     
     // Un utilisateur ne peut voir que son propre score
-    if (session.user.id !== userId) {
+    if ((session as { user?: { id: string } }).user?.id !== userId) {
       return NextResponse.json(
         { error: 'Accès non autorisé' }, 
         { status: 403 }

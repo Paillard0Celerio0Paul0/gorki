@@ -1,14 +1,14 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { getTodayStart, getTodayEnd, getWeekStart, getWeekEnd } from "@/lib/prediction-utils";
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     const session = await getServerSession(authOptions);
     
-    if (!session?.user?.is_admin) {
+    if (!(session as { user?: { is_admin?: boolean } }).user?.is_admin) {
       return NextResponse.json(
         { error: 'Accès non autorisé. Admin requis.' }, 
         { status: 403 }

@@ -24,7 +24,7 @@ export default function PredictionsList({ type }: PredictionsListProps) {
         } else {
           setError('Erreur lors du chargement des prédictions');
         }
-      } catch (error) {
+      } catch {
         setError('Erreur de connexion');
       } finally {
         setIsLoading(false);
@@ -51,7 +51,7 @@ export default function PredictionsList({ type }: PredictionsListProps) {
         const data = await response.json();
         alert(`Erreur: ${data.error}`);
       }
-    } catch (error) {
+    } catch {
       alert('Erreur lors de la validation');
     }
   };
@@ -65,7 +65,7 @@ export default function PredictionsList({ type }: PredictionsListProps) {
         hour: '2-digit',
         minute: '2-digit'
       });
-    } catch (error) {
+    } catch {
       return 'Date invalide';
     }
   };
@@ -92,7 +92,7 @@ export default function PredictionsList({ type }: PredictionsListProps) {
       } else {
         return `${minutes}m`;
       }
-    } catch (error) {
+    } catch {
       return 'Erreur';
     }
   };

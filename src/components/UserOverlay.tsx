@@ -39,7 +39,7 @@ export default function UserOverlay() {
           <div className="relative">
             <img
               src={session.user.image || "/default-avatar.png"}
-              alt={session.user.username}
+              alt={(session.user as { username: string }).username}
               className="w-10 h-10 rounded-full border-2 border-gray-600/50 object-cover"
               onError={(e) => {
                 // Fallback si l'image ne charge pas
@@ -55,9 +55,9 @@ export default function UserOverlay() {
           <div className="min-w-0 flex-1">
             <div className="flex items-center gap-2">
               <span className="text-white font-dogelica text-sm font-bold truncate max-w-[120px]">
-                {session.user.username}
+                {session?.user && (session.user as { username?: string }).username}
               </span>
-              {session.user.is_admin && (
+              {session?.user && (session.user as { is_admin?: boolean }).is_admin && (
                 <span className="bg-yellow-500 text-black text-xs px-2 py-0.5 rounded-full font-bold">
                   ADMIN
                 </span>
@@ -115,7 +115,7 @@ export default function UserOverlay() {
       {/* Tooltip d'information */}
       {!isExpanded && (
         <div className="absolute bottom-full right-0 mb-2 px-2 py-1 bg-black/90 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
-          Survole pour plus d'options
+          Survole pour plus d&apos;options
         </div>
       )}
 

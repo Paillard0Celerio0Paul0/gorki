@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { Prediction, PredictionType } from '@/types/predictions';
-import { getTimeRemaining } from '@/lib/prediction-utils';
+// import { getTimeRemaining } from '@/lib/prediction-utils';
 
 interface PredictionCardProps {
   prediction: Prediction;
@@ -33,16 +33,16 @@ export default function PredictionCard({ prediction, onVoteSuccess }: Prediction
       } else {
         setError(data.error || 'Erreur lors du vote');
       }
-    } catch (error) {
+    } catch {
       setError('Erreur de connexion');
     } finally {
       setIsVoting(false);
     }
   };
 
-  const timeRemaining = prediction.voting_closes_at 
-    ? getTimeRemaining(prediction.voting_closes_at)
-    : null;
+  // const timeRemaining = prediction.voting_closes_at 
+  //   ? getTimeRemaining(prediction.voting_closes_at)
+  //   : null;
 
   const isVotingClosed = !prediction.voting_open || 
     (prediction.voting_closes_at && new Date() > new Date(prediction.voting_closes_at));
@@ -191,7 +191,7 @@ export default function PredictionCard({ prediction, onVoteSuccess }: Prediction
       {!isVotingClosed && prediction.userVote && (
         <div className=" mt-4 bg-blue-500/20 border border-blue-500/50 rounded-lg p-2 text-center">
           <p className="text-blue-400 font-dogelica text-sm">
-            ✅ Tu as déjà voté "{prediction.userVote.vote ? 'OUI' : 'NON'}" - Vote définitif
+            ✅ Tu as déjà voté &quot;{prediction.userVote.vote ? 'OUI' : 'NON'}&quot; - Vote définitif
           </p>
         </div>
       )}

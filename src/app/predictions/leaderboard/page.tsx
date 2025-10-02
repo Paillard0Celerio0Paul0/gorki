@@ -23,7 +23,7 @@ export default function PredictionsLeaderboardPage() {
         } else {
           setError('Erreur lors du chargement du classement');
         }
-      } catch (error) {
+      } catch {
         setError('Erreur de connexion');
       } finally {
         setIsLoading(false);

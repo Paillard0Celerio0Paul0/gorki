@@ -42,7 +42,7 @@ export default function PredictionsPage() {
         } else {
           setError('Erreur lors du chargement des prédictions');
         }
-      } catch (error) {
+      } catch {
         setError('Erreur de connexion');
       } finally {
         setIsLoading(false);

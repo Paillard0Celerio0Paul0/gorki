@@ -9,7 +9,7 @@ export async function POST(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions);
     
-    if (!session?.user?.is_admin) {
+    if (!(session as { user?: { is_admin?: boolean } }).user?.is_admin) {
       return NextResponse.json(
         { error: 'Accès non autorisé. Admin requis.' }, 
         { status: 403 }
@@ -93,7 +93,7 @@ export async function POST(request: NextRequest) {
         text,
         type,
         points,
-        created_by: session.user.id,
+        created_by: (session as { user?: { id: string } }).user?.id || '',
         mentioned_user_id: mentioned_user_id || null,
         // Pour les prédictions journalières
         ...(type === PredictionType.DAILY && {
@@ -137,7 +137,7 @@ export async function GET(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions);
     
-    if (!session?.user) {
+    if (!(session as { user?: { id: string } }).user?.id) {
       return NextResponse.json(
         { error: 'Authentification requise' }, 
         { status: 401 }
@@ -182,7 +182,7 @@ export async function GET(request: NextRequest) {
         },
         votes: {
           where: {
-            user_id: session.user.id
+            user_id: (session as { user?: { id: string } }).user?.id || ''
           },
           select: {
             vote: true,

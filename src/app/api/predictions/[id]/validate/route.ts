@@ -10,7 +10,7 @@ export async function POST(
   try {
     const session = await getServerSession(authOptions);
     
-    if (!session?.user?.is_admin) {
+    if (!session || !(session as { user?: { is_admin?: boolean } }).user?.is_admin) {
       return NextResponse.json(
         { error: 'Accès non autorisé. Admin requis.' }, 
         { status: 403 }
@@ -53,7 +53,7 @@ export async function POST(
         is_validated: true,
         correct_answer: correct_answer,
         validated_at: new Date(),
-        validated_by: session.user.id,
+        validated_by: (session as { user?: { id: string } }).user?.id || '',
         voting_open: false
       },
       include: {
@@ -90,51 +90,35 @@ export async function POST(
         // Mettre à jour le score existant
         // Déterminer les champs à mettre à jour selon le type de prédiction
         const isDaily = prediction.type === 'DAILY';
-        const updateData: Record<string, unknown> = {
-          total_points_possible: currentScore.total_points_possible + points,
-          total_points_earned: currentScore.total_points_earned + (isCorrect ? points : 0),
-          accuracy_percentage: ((currentScore.total_points_earned + (isCorrect ? points : 0)) / (currentScore.total_points_possible + points)) * 100,
-          last_updated: new Date()
-        };
-
-        if (isDaily) {
-          updateData.daily_total = currentScore.daily_total + 1;
-          updateData.daily_correct = currentScore.daily_correct + (isCorrect ? 1 : 0);
-        } else {
-          updateData.weekly_total = currentScore.weekly_total + 1;
-          updateData.weekly_correct = currentScore.weekly_correct + (isCorrect ? 1 : 0);
-        }
-
         await prisma.userScore.update({
           where: { user_id: userId },
-          data: updateData
+          data: {
+            daily_total: isDaily ? currentScore.daily_total + 1 : currentScore.daily_total,
+            daily_correct: isDaily ? currentScore.daily_correct + (isCorrect ? 1 : 0) : currentScore.daily_correct,
+            weekly_total: isDaily ? currentScore.weekly_total : currentScore.weekly_total + 1,
+            weekly_correct: isDaily ? currentScore.weekly_correct : currentScore.weekly_correct + (isCorrect ? 1 : 0),
+            total_points_possible: currentScore.total_points_possible + points,
+            total_points_earned: currentScore.total_points_earned + (isCorrect ? points : 0),
+            accuracy_percentage: ((currentScore.total_points_earned + (isCorrect ? points : 0)) / (currentScore.total_points_possible + points)) * 100,
+            last_updated: new Date()
+          }
         });
       } else {
         // Créer un nouveau score
         // Créer un nouveau score avec les bons champs
         const isDaily = prediction.type === 'DAILY';
-        const createData: Record<string, unknown> = {
-          user_id: userId,
-          total_points_possible: points,
-          total_points_earned: isCorrect ? points : 0,
-          accuracy_percentage: isCorrect ? 100 : 0,
-          last_updated: new Date()
-        };
-
-        if (isDaily) {
-          createData.daily_total = 1;
-          createData.daily_correct = isCorrect ? 1 : 0;
-          createData.weekly_total = 0;
-          createData.weekly_correct = 0;
-        } else {
-          createData.weekly_total = 1;
-          createData.weekly_correct = isCorrect ? 1 : 0;
-          createData.daily_total = 0;
-          createData.daily_correct = 0;
-        }
-
         await prisma.userScore.create({
-          data: createData
+          data: {
+            user_id: userId,
+            daily_total: isDaily ? 1 : 0,
+            daily_correct: isDaily && isCorrect ? 1 : 0,
+            weekly_total: isDaily ? 0 : 1,
+            weekly_correct: !isDaily && isCorrect ? 1 : 0,
+            total_points_possible: points,
+            total_points_earned: isCorrect ? points : 0,
+            accuracy_percentage: isCorrect ? 100 : 0,
+            last_updated: new Date()
+          }
         });
       }
     }

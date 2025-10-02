@@ -23,7 +23,7 @@ export default function AdminPredictionsPage() {
       return;
     }
     
-    if (!session.user.is_admin) {
+    if (!(session.user as { is_admin?: boolean }).is_admin) {
       router.push('/');
       return;
     }
@@ -45,7 +45,7 @@ export default function AdminPredictionsPage() {
       }
     };
 
-    if (session?.user?.is_admin) {
+    if ((session?.user as { is_admin?: boolean })?.is_admin) {
       fetchLimits();
     }
   }, [session]);
@@ -61,7 +61,7 @@ export default function AdminPredictionsPage() {
     );
   }
 
-  if (!session?.user?.is_admin) {
+  if (!(session?.user as { is_admin?: boolean })?.is_admin) {
     return null; // Redirection en cours
   }
 

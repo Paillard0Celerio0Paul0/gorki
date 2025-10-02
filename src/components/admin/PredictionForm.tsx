@@ -57,7 +57,7 @@ export default function PredictionForm({ type, canCreate, onCreated }: Predictio
       } else {
         setError(data.error || 'Erreur lors de la création');
       }
-    } catch (error) {
+    } catch {
       setError('Erreur de connexion');
     } finally {
       setIsSubmitting(false);
@@ -123,15 +123,15 @@ export default function PredictionForm({ type, canCreate, onCreated }: Predictio
           <ul className="text-sm text-gray-400 space-y-1">
             {type === 'daily' ? (
               <>
-                <li>• "Le joueur X gagnera plus de 3 parties aujourd'hui"</li>
-                <li>• "Au moins 2 joueurs atteindront un nouveau rang"</li>
-                <li>• "Le joueur Y aura un taux de victoire supérieur à 60%"</li>
+                <li>• &quot;Le joueur X gagnera plus de 3 parties aujourd&apos;hui&quot;</li>
+                <li>• &quot;Au moins 2 joueurs atteindront un nouveau rang&quot;</li>
+                <li>• &quot;Le joueur Y aura un taux de victoire supérieur à 60%&quot;</li>
               </>
             ) : (
               <>
-                <li>• "Le joueur X montera de 2 divisions cette semaine"</li>
-                <li>• "Au moins 5 joueurs atteindront un nouveau rang"</li>
-                <li>• "Le joueur Y aura le meilleur score de la semaine"</li>
+                <li>• &quot;Le joueur X montera de 2 divisions cette semaine&quot;</li>
+                <li>• &quot;Au moins 5 joueurs atteindront un nouveau rang&quot;</li>
+                <li>• &quot;Le joueur Y aura le meilleur score de la semaine&quot;</li>
               </>
             )}
           </ul>

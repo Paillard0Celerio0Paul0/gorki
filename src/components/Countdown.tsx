@@ -3,7 +3,7 @@
 import { useSession } from "next-auth/react";
 
 export default function Countdown() {
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-black text-white relative overflow-hidden pt-16">
