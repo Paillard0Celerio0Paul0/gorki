@@ -3,13 +3,22 @@ import { prisma } from "@/lib/prisma";
 
 export async function GET() {
   try {
-    // Récupérer tous les scores utilisateur qui ont voté
+    // Récupérer tous les scores utilisateur qui ont voté avec les infos utilisateur
     const scores = await prisma.userScore.findMany({
       where: {
         OR: [
           { daily_total: { gt: 0 } },
           { weekly_total: { gt: 0 } }
         ]
+      },
+      include: {
+        user: {
+          select: {
+            id: true,
+            username: true,
+            avatar_url: true
+          }
+        }
       },
       orderBy: [
         { total_points_earned: 'desc' },
