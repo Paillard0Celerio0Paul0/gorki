@@ -1,4 +1,4 @@
-import { Client, GatewayIntentBits, ChannelType } from 'discord.js';
+import { Client, GatewayIntentBits, ChannelType, AttachmentBuilder } from 'discord.js';
 
 // Configuration du bot Discord
 const bot = new Client({
@@ -44,13 +44,15 @@ export async function sendAudioMessage(
     // Log pour debug
     console.log(`📤 Envoi fichier audio: ${fileName}, taille: ${audioBuffer.length} bytes`);
     
+    // Créer un AttachmentBuilder pour le fichier audio
+    const audioAttachment = new AttachmentBuilder(audioBuffer, {
+      name: fileName
+    });
+    
     // Envoyer le message avec le fichier audio
     const sentMessage = await channel.send({
       content: message,
-      files: [{
-        attachment: audioBuffer,
-        name: fileName
-      }]
+      files: [audioAttachment]
     });
     
     console.log(`✅ Message envoyé avec succès: ${sentMessage.id}`);
