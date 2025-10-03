@@ -202,6 +202,40 @@ export default function PredictionsList({ type }: PredictionsListProps) {
                   </p>
                 )}
                 <p>Total votes: {prediction.totalVotes || 0} | OUI: {prediction.yesVotes || 0} | NON: {prediction.noVotes || 0}</p>
+                
+                {/* Avatars des votants */}
+                {prediction.allVotes && Array.isArray(prediction.allVotes) && prediction.allVotes.length > 0 && (
+                  <div className="mt-2">
+                    <div className="text-xs text-gray-400 mb-1">Votants:</div>
+                    <div className="flex flex-wrap gap-1">
+                      {prediction.allVotes.map((vote: any) => (
+                        <div
+                          key={vote.id}
+                          className="flex items-center gap-1 bg-gray-800/50 rounded-full px-2 py-1"
+                          title={`${vote.user?.username} a voté ${vote.vote ? 'OUI' : 'NON'}`}
+                        >
+                          {vote.user?.avatar_url ? (
+                            <img
+                              src={vote.user.avatar_url}
+                              alt={vote.user.username}
+                              className="w-3 h-3 rounded-full"
+                              onError={(e) => {
+                                (e.target as HTMLImageElement).src = '/default-avatar.png';
+                              }}
+                            />
+                          ) : (
+                            <div className="w-3 h-3 rounded-full bg-gray-600 flex items-center justify-center text-white text-xs font-bold">
+                              {vote.user?.username?.charAt(0).toUpperCase() || '?'}
+                            </div>
+                          )}
+                          <span className={`text-xs font-bold ${vote.vote ? 'text-green-400' : 'text-red-400'}`}>
+                            {vote.vote ? '✓' : '✗'}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>
