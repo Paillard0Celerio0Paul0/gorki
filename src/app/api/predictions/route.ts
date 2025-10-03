@@ -181,13 +181,18 @@ export async function GET(request: NextRequest) {
           }
         },
         votes: {
-          where: {
-            user_id: (session as { user?: { id: string } }).user?.id || ''
-          },
           select: {
+            id: true,
             vote: true,
             created_at: true,
-            updated_at: true
+            updated_at: true,
+            user: {
+              select: {
+                id: true,
+                username: true,
+                avatar_url: true
+              }
+            }
           }
         },
         _count: {
@@ -202,26 +207,27 @@ export async function GET(request: NextRequest) {
     });
 
     // Enrichir avec les statistiques de vote
-    const predictionsWithStats = await Promise.all(
-      predictions.map(async (prediction: { id: string; votes: Record<string, unknown>[]; }) => {
-        const [yesVotes, noVotes] = await Promise.all([
-          prisma.vote.count({
-            where: { prediction_id: prediction.id, vote: true }
-          }),
-          prisma.vote.count({
-            where: { prediction_id: prediction.id, vote: false }
-          })
-        ]);
+    const predictionsWithStats = predictions.map((prediction: any) => {
+      const userId = (session as { user?: { id: string } }).user?.id;
+      
+      // Séparer le vote de l'utilisateur connecté des autres votes
+      const userVote = prediction.votes.find((vote: any) => vote.user?.id === userId) || null;
+      const allVotes = prediction.votes;
+      
+      // Calculer les statistiques
+      const yesVotes = prediction.votes.filter((vote: any) => vote.vote === true).length;
+      const noVotes = prediction.votes.filter((vote: any) => vote.vote === false).length;
+      const totalVotes = yesVotes + noVotes;
 
-        return {
-          ...prediction,
-          userVote: prediction.votes[0] || null,
-          totalVotes: yesVotes + noVotes,
-          yesVotes,
-          noVotes
-        };
-      })
-    );
+      return {
+        ...prediction,
+        userVote,
+        allVotes,
+        totalVotes,
+        yesVotes,
+        noVotes
+      };
+    });
 
     return NextResponse.json(predictionsWithStats);
 

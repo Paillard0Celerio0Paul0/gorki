@@ -34,6 +34,7 @@ export interface Prediction {
   
   // Relations
   votes?: Vote[];
+  allVotes?: Vote[];             // Tous les votes avec les utilisateurs
   creator?: User;
   mentioned_user?: User;         // Utilisateur mentionné dans la prédiction
   userVote?: Vote;               // Vote de l'utilisateur connecté (si existe)
