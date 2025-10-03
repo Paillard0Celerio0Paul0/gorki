@@ -207,16 +207,30 @@ export async function GET(request: NextRequest) {
     });
 
     // Enrichir avec les statistiques de vote
-    const predictionsWithStats = predictions.map((prediction: any) => {
+    const predictionsWithStats = predictions.map((prediction: {
+      id: string;
+      votes: Array<{
+        id: string;
+        vote: boolean;
+        created_at: Date;
+        updated_at: Date;
+        user: {
+          id: string;
+          username: string;
+          avatar_url: string | null;
+        };
+      }>;
+      [key: string]: unknown;
+    }) => {
       const userId = (session as { user?: { id: string } }).user?.id;
       
       // Séparer le vote de l'utilisateur connecté des autres votes
-      const userVote = prediction.votes.find((vote: any) => vote.user?.id === userId) || null;
+      const userVote = prediction.votes.find((vote) => vote.user?.id === userId) || null;
       const allVotes = prediction.votes;
       
       // Calculer les statistiques
-      const yesVotes = prediction.votes.filter((vote: any) => vote.vote === true).length;
-      const noVotes = prediction.votes.filter((vote: any) => vote.vote === false).length;
+      const yesVotes = prediction.votes.filter((vote) => vote.vote === true).length;
+      const noVotes = prediction.votes.filter((vote) => vote.vote === false).length;
       const totalVotes = yesVotes + noVotes;
 
       return {
