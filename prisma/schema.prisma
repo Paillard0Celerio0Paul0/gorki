@@ -133,3 +133,10 @@ model UserScore {
   @@index([total_points_earned]) // Pour le classement
   @@index([accuracy_percentage]) // Pour le classement par précision
 }
+
+model MagicWord {
+  id          String   @id @default(cuid())
+  word        String   @unique // Le mot magique
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+}

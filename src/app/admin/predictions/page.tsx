@@ -13,6 +13,9 @@ export default function AdminPredictionsPage() {
   const [activeTab, setActiveTab] = useState<'daily' | 'weekly'>('daily');
   const [limits, setLimits] = useState<PredictionLimits | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [magicWord, setMagicWord] = useState('');
+  const [newMagicWord, setNewMagicWord] = useState('');
+  const [isSavingMagicWord, setIsSavingMagicWord] = useState(false);
 
   // Redirection si pas admin
   useEffect(() => {
@@ -29,26 +32,68 @@ export default function AdminPredictionsPage() {
     }
   }, [session, status, router]);
 
-  // Charger les limites
+  // Charger les limites et le mot magique
   useEffect(() => {
-    const fetchLimits = async () => {
+    const fetchData = async () => {
       try {
-        const response = await fetch('/api/predictions/limits');
-        if (response.ok) {
-          const data = await response.json();
-          setLimits(data);
+        // Charger les limites
+        const limitsResponse = await fetch('/api/predictions/limits');
+        if (limitsResponse.ok) {
+          const limitsData = await limitsResponse.json();
+          setLimits(limitsData);
+        }
+
+        // Charger le mot magique
+        const magicWordResponse = await fetch('/api/magic-word');
+        if (magicWordResponse.ok) {
+          const magicWordData = await magicWordResponse.json();
+          setMagicWord(magicWordData.magicWord || '');
+          setNewMagicWord(magicWordData.magicWord || '');
         }
       } catch (error) {
-        console.error('Erreur lors du chargement des limites:', error);
+        console.error('Erreur lors du chargement des données:', error);
       } finally {
         setIsLoading(false);
       }
     };
 
     if ((session?.user as { is_admin?: boolean })?.is_admin) {
-      fetchLimits();
+      fetchData();
     }
   }, [session]);
+
+  // Sauvegarder le mot magique
+  const handleSaveMagicWord = async () => {
+    if (!newMagicWord.trim()) {
+      alert('Le mot magique ne peut pas être vide');
+      return;
+    }
+
+    setIsSavingMagicWord(true);
+    try {
+      const response = await fetch('/api/magic-word', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ word: newMagicWord }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setMagicWord(data.magicWord);
+        alert('Mot magique mis à jour avec succès !');
+      } else {
+        const error = await response.json();
+        alert('Erreur: ' + error.error);
+      }
+    } catch (error) {
+      console.error('Erreur lors de la sauvegarde:', error);
+      alert('Erreur lors de la sauvegarde');
+    } finally {
+      setIsSavingMagicWord(false);
+    }
+  };
 
   if (status === 'loading' || isLoading) {
     return (
@@ -128,6 +173,67 @@ export default function AdminPredictionsPage() {
             </div>
           </div>
         )}
+
+        {/* Section Mot Magique */}
+        <div className="bg-black/60 backdrop-blur-sm rounded-xl p-6 border border-gray-800/50 mb-8">
+          <h2 className="text-xl font-bold text-white mb-4 font-dogelica flex items-center gap-2">
+            🔮 Gestion du Mot Magique
+          </h2>
+          <p className="text-gray-400 text-sm mb-4">
+            Définis le mot magique que les utilisateurs devront entrer dans la card &quot;???&quot; sur la page principale.
+          </p>
+          
+          <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex-1">
+              <label className="block text-sm font-medium text-gray-300 mb-2">
+                Mot magique actuel
+              </label>
+              <input
+                type="text"
+                value={magicWord}
+                disabled
+                className="w-full px-3 py-2 bg-gray-800/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none disabled:opacity-50 text-sm"
+                placeholder="Aucun mot magique défini"
+              />
+            </div>
+            
+            <div className="flex-1">
+              <label className="block text-sm font-medium text-gray-300 mb-2">
+                Nouveau mot magique
+              </label>
+              <div className="flex gap-2">
+                <input
+                  type="text"
+                  value={newMagicWord}
+                  onChange={(e) => setNewMagicWord(e.target.value)}
+                  className="flex-1 px-3 py-2 bg-gray-800/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-blue-400 transition-colors duration-300 text-sm"
+                  placeholder="Entrez le nouveau mot magique..."
+                />
+                <button
+                  onClick={handleSaveMagicWord}
+                  disabled={isSavingMagicWord || !newMagicWord.trim()}
+                  className="px-4 py-2 bg-blue-600 text-white font-bold font-dogelica rounded-lg hover:bg-blue-700 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
+                >
+                  {isSavingMagicWord ? (
+                    <div className="flex items-center gap-2">
+                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                      <span>Sauvegarde...</span>
+                    </div>
+                  ) : (
+                    'Sauvegarder'
+                  )}
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          <div className="mt-4 p-3 bg-blue-500/10 border border-blue-500/30 rounded-lg">
+            <p className="text-blue-300 text-xs">
+              💡 <strong>Note:</strong> Le mot sera automatiquement normalisé (espaces supprimés, minuscules). 
+              Les utilisateurs pourront l&apos;écrire avec des espaces et majuscules.
+            </p>
+          </div>
+        </div>
 
         {/* Onglets */}
         <div className="flex space-x-4 mb-8">

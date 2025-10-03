@@ -40,10 +40,10 @@ const participants = [
     dpmLink: "https://dpm.lol/la%20fraude-IMPOT"
   },
   {
-    name: "Scar",
-    catchphrase: "",
-    peakElo: "Diamant 4",
-    objective: "Emeraude 4",
+    name: "?",
+    catchphrase: "The undertaker",
+    peakElo: "?",
+    objective: "?",
     dpmLink: ""
   },
   {
