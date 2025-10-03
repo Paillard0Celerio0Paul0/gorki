@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { Prediction, PredictionType } from '@/types/predictions';
 // import { getTimeRemaining } from '@/lib/prediction-utils';
 
@@ -219,7 +220,7 @@ export default function PredictionCard({ prediction, onVoteSuccess }: Prediction
       )}
 
       {/* Avatars des votants */}
-      {prediction.allVotes && prediction.allVotes.length > 0 && (
+      {prediction.allVotes && Array.isArray(prediction.allVotes) && prediction.allVotes.length > 0 && (
         <div className="mt-4">
           <div className="text-xs text-gray-400 mb-2">Votants:</div>
           <div className="flex flex-wrap gap-2">
@@ -230,13 +231,12 @@ export default function PredictionCard({ prediction, onVoteSuccess }: Prediction
                 title={`${vote.user?.username} a voté ${vote.vote ? 'OUI' : 'NON'}`}
               >
                 {vote.user?.avatar_url ? (
-                  <img
+                  <Image
                     src={vote.user.avatar_url}
-                    alt={vote.user.username}
+                    alt={vote.user.username || 'Avatar'}
+                    width={16}
+                    height={16}
                     className="w-4 h-4 rounded-full"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).src = '/default-avatar.png';
-                    }}
                   />
                 ) : (
                   <div className="w-4 h-4 rounded-full bg-gray-600 flex items-center justify-center text-white text-xs font-bold">

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { User } from '@/types/predictions';
 
 interface UserSelectorProps {
@@ -20,7 +21,7 @@ export default function UserSelector({ selectedUserId, onUserSelect }: UserSelec
         const response = await fetch('/api/users');
         if (response.ok) {
           const data = await response.json();
-          setUsers(data);
+          setUsers(data.users || []);
         }
       } catch (error) {
         console.error('Erreur lors du chargement des utilisateurs:', error);
@@ -58,9 +59,11 @@ export default function UserSelector({ selectedUserId, onUserSelect }: UserSelec
         {selectedUser ? (
           <>
             {selectedUser.avatar_url ? (
-              <img
+              <Image
                 src={selectedUser.avatar_url}
                 alt={selectedUser.username}
+                width={32}
+                height={32}
                 className="w-8 h-8 rounded-full"
               />
             ) : (
@@ -116,9 +119,11 @@ export default function UserSelector({ selectedUserId, onUserSelect }: UserSelec
                   }`}
                 >
                   {user.avatar_url ? (
-                    <img
+                    <Image
                       src={user.avatar_url}
                       alt={user.username}
+                      width={32}
+                      height={32}
                       className="w-8 h-8 rounded-full"
                     />
                   ) : (
