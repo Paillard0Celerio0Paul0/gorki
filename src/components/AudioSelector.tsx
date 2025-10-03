@@ -50,7 +50,13 @@ export default function AudioSelector({ onAudioSelected, onCancel }: AudioSelect
       const data = await response.json();
 
       if (data.success) {
-        onAudioSelected('url', data.url);
+        if (data.type === 'blob') {
+          // L'API retourne un Blob directement
+          onAudioSelected('file', audioBlob);
+        } else {
+          // L'API retourne une URL (fallback)
+          onAudioSelected('url', data.url);
+        }
       } else {
         console.error('Erreur lors de l\'upload:', data.error);
         alert('Erreur lors de l\'upload du fichier audio');

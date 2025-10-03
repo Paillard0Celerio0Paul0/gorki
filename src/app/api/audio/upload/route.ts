@@ -1,11 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/lib/auth';
-import { writeFile, mkdir } from 'fs/promises';
-import { join } from 'path';
-import { existsSync } from 'fs';
 
-// POST - Upload d'un fichier audio
+// POST - Upload d'un fichier audio (retourne directement le Blob)
 export async function POST(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions);
@@ -26,37 +23,27 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Le fichier doit être un fichier audio' }, { status: 400 });
     }
 
-    // Vérifier la taille (max 10MB)
-    const maxSize = 10 * 1024 * 1024; // 10MB
+    // Vérifier la taille (max 8MB pour Discord)
+    const maxSize = 8 * 1024 * 1024; // 8MB
     if (audioFile.size > maxSize) {
-      return NextResponse.json({ error: 'Le fichier est trop volumineux (max 10MB)' }, { status: 400 });
+      return NextResponse.json({ error: 'Le fichier est trop volumineux (max 8MB)' }, { status: 400 });
     }
 
-    // Créer le dossier uploads s'il n'existe pas
-    const uploadsDir = join(process.cwd(), 'public', 'uploads', 'audio');
-    if (!existsSync(uploadsDir)) {
-      await mkdir(uploadsDir, { recursive: true });
-    }
-
+    // Convertir le fichier en Blob et le retourner directement
+    const audioBlob = new Blob([await audioFile.arrayBuffer()], { type: audioFile.type });
+    
     // Générer un nom de fichier unique
     const timestamp = Date.now();
     const randomId = Math.random().toString(36).substring(2, 15);
     const fileExtension = audioFile.name.split('.').pop() || 'mp3';
     const fileName = `audio_${timestamp}_${randomId}.${fileExtension}`;
-    const filePath = join(uploadsDir, fileName);
 
-    // Convertir le fichier en buffer et l'écrire
-    const bytes = await audioFile.arrayBuffer();
-    const buffer = Buffer.from(bytes);
-    await writeFile(filePath, buffer);
-
-    // Retourner l'URL publique du fichier
-    const publicUrl = `/uploads/audio/${fileName}`;
-
+    // Retourner le Blob directement (pas d'URL car pas de stockage)
     return NextResponse.json({ 
       success: true, 
-      url: publicUrl,
-      fileName: fileName
+      blob: audioBlob,
+      fileName: fileName,
+      type: 'blob' // Indique que c'est un Blob, pas une URL
     });
 
   } catch (error) {
