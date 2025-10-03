@@ -50,7 +50,27 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Non autorisé' }, { status: 401 });
     }
 
-    const { targetUserId, audioType, audioFile, audioUrl } = await request.json();
+    // Gérer les deux types de requêtes : JSON et FormData
+    let targetUserId: string;
+    let audioType: 'file' | 'url';
+    let audioFile: Blob | undefined;
+    let audioUrl: string | undefined;
+
+    const contentType = request.headers.get('content-type');
+    
+    if (contentType?.includes('multipart/form-data')) {
+      // Requête FormData (pour les fichiers)
+      const formData = await request.formData();
+      targetUserId = formData.get('targetUserId') as string;
+      audioType = formData.get('audioType') as 'file' | 'url';
+      audioFile = formData.get('audioFile') as Blob;
+    } else {
+      // Requête JSON (pour les URLs)
+      const jsonData = await request.json();
+      targetUserId = jsonData.targetUserId;
+      audioType = jsonData.audioType;
+      audioUrl = jsonData.audioUrl;
+    }
 
     if (!targetUserId) {
       return NextResponse.json({ error: 'Utilisateur cible requis' }, { status: 400 });
@@ -91,13 +111,20 @@ export async function POST(request: NextRequest) {
     // Gérer l'envoi selon le type d'audio
     if (audioType === 'file' && audioFile) {
       try {
-        // Convertir le fichier en Buffer pour le bot Discord
+        // Vérifier que audioFile est bien un Blob
+        if (!(audioFile instanceof Blob)) {
+          throw new Error('Format de fichier audio invalide');
+        }
+        
+        // Convertir le Blob en Buffer pour le bot Discord
         const audioBuffer = Buffer.from(await audioFile.arrayBuffer());
         
         // Vérifier la taille du fichier (max 8MB pour Discord)
         if (audioBuffer.length > 8 * 1024 * 1024) {
           throw new Error('Fichier audio trop volumineux (max 8MB)');
         }
+        
+        console.log(`📦 Buffer audio créé: ${audioBuffer.length} bytes`);
         
         // Envoyer le message avec le fichier audio via le bot
         const result = await sendAudioMessage(

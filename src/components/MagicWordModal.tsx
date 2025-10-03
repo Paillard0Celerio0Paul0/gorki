@@ -64,30 +64,35 @@ export default function MagicWordModal({ isOpen, onClose }: MagicWordModalProps)
     setSuccess(null);
 
     try {
-      const payload: {
-        targetUserId: string;
-        audioType: 'file' | 'url';
-        audioUrl?: string;
-        audioFile?: Blob;
-      } = {
-        targetUserId: selectedUser,
-        audioType: selectedAudio.type,
-      };
+      let response: Response;
 
       if (selectedAudio.type === 'url') {
-        payload.audioUrl = selectedAudio.data as string;
-      } else {
-        // Pour les fichiers, on les enverra comme Blob
-        payload.audioFile = selectedAudio.data as Blob;
-      }
+        // Pour les URLs, utiliser JSON
+        const payload = {
+          targetUserId: selectedUser,
+          audioType: 'url' as const,
+          audioUrl: selectedAudio.data as string,
+        };
 
-      const response = await fetch('/api/discord/notify', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      });
+        response = await fetch('/api/discord/notify', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(payload),
+        });
+      } else {
+        // Pour les fichiers, utiliser FormData
+        const formData = new FormData();
+        formData.append('targetUserId', selectedUser);
+        formData.append('audioType', 'file');
+        formData.append('audioFile', selectedAudio.data as Blob, 'audio.mp3');
+
+        response = await fetch('/api/discord/notify', {
+          method: 'POST',
+          body: formData,
+        });
+      }
 
       const data = await response.json();
 
