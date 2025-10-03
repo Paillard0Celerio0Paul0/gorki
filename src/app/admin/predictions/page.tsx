@@ -111,21 +111,21 @@ export default function AdminPredictionsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white pt-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div className="min-h-screen bg-black text-white pt-14 sm:pt-20">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 py-8 sm:py-12">
         {/* En-tête */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 font-dogelica">
+        <div className="text-center mb-8 sm:mb-12">
+          <h1 className="text-2xl sm:text-4xl md:text-6xl font-bold text-white mb-4 sm:mb-6 font-dogelica">
             🎯 Gestion des Prédictions
           </h1>
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+          <p className="text-sm sm:text-lg md:text-xl text-gray-400 max-w-3xl mx-auto px-4">
             Crée et gére les prédictions journalières et hebdomadaires du challenge
           </p>
         </div>
 
         {/* Statistiques rapides */}
         {limits && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-6 md:mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
             <div className="bg-black/60 backdrop-blur-sm rounded-xl p-4 md:p-6 border border-gray-800/50">
               <div className="flex items-center justify-between">
                 <div>
@@ -236,7 +236,7 @@ export default function AdminPredictionsPage() {
         </div>
 
         {/* Onglets */}
-        <div className="flex space-x-4 mb-8">
+        <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4 mb-6 sm:mb-8">
           <button
             onClick={() => setActiveTab('daily')}
             className={`px-6 py-3 rounded-lg font-dogelica transition-all duration-300 ${
@@ -266,7 +266,7 @@ export default function AdminPredictionsPage() {
         </div>
 
         {/* Formulaire de création */}
-        <div className="mb-12">
+        <div className="mb-8 sm:mb-12">
           <PredictionForm 
             type={activeTab}
             canCreate={
@@ -283,14 +283,14 @@ export default function AdminPredictionsPage() {
 
         {/* Liste des prédictions */}
         <div>
-          <h2 className="text-2xl font-bold text-white mb-6 font-dogelica">
+          <h2 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6 font-dogelica">
             {activeTab === 'daily' ? 'Prédictions Journalières' : 'Prédictions Hebdomadaires'}
           </h2>
           <PredictionsList type={activeTab} />
         </div>
 
         {/* Bouton retour */}
-        <div className="text-center mt-12">
+        <div className="text-center mt-8 sm:mt-12">
           <button
             onClick={() => router.push('/')}
             className="inline-block px-6 py-3 bg-yellow-400/20 text-yellow-400 font-bold font-dogelica rounded-lg border border-yellow-400/30 hover:bg-yellow-400/30 hover:text-yellow-300 transition-all duration-300"

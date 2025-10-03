@@ -41,7 +41,7 @@ const participants = [
   },
   {
     name: "?",
-    catchphrase: "The undertaker",
+    catchphrase: "the cheese is oosin",
     peakElo: "?",
     objective: "?",
     dpmLink: ""
@@ -183,20 +183,20 @@ const participants = [
 
 export default function ParticipantsPage() {
   return (
-    <div className="min-h-screen bg-black text-white pt-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div className="min-h-screen bg-black text-white pt-14 sm:pt-20">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 py-8 sm:py-12">
         {/* En-tête */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 font-dogelica">
+        <div className="text-center mb-8 sm:mb-12">
+          <h1 className="text-2xl sm:text-4xl md:text-6xl font-bold text-white mb-4 sm:mb-6 font-dogelica">
             Participants
           </h1>
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+          <p className="text-sm sm:text-lg md:text-xl text-gray-400 max-w-3xl mx-auto px-4">
             Découvrez les joueurs qui participeront au Gorki SoloQ Challenge. 
           </p>
         </div>
 
         {/* Grille des participants */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
           {participants.map((participant, index) => (
             <div 
               key={participant.name}

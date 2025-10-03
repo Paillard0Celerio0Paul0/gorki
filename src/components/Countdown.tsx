@@ -45,45 +45,45 @@ export default function Countdown() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-black text-white relative overflow-hidden pt-16 pb-64 md:pb-20 pb-32">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-black text-white relative overflow-hidden pt-14 sm:pt-16 pb-20 sm:pb-32">
       {/* Effet de particules sombres en arrière-plan */}
       <div className="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-black opacity-90"></div>
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(0,0,0,0.8),transparent_70%)]"></div>
       
-      <div className="relative z-10 text-center mb-12">
-        <div className="mb-8 opacity-0 animate-fade-in">
+      <div className="relative z-10 text-center mb-8 sm:mb-12 px-4">
+        <div className="mb-6 sm:mb-8 opacity-0 animate-fade-in">
           <div className="flex items-center justify-center gap-3">
             <a 
               href="/leaderboard" 
-              className="text-2xl md:text-3xl font-bold text-yellow-400 hover:text-yellow-300 transition-colors duration-300 font-dogelica text-shadow-glow"
+              className="text-lg sm:text-2xl md:text-3xl font-bold text-yellow-400 hover:text-yellow-300 transition-colors duration-300 font-dogelica text-shadow-glow"
             >
               🏆 Leaderboard DPM
             </a>
           </div>
         </div>
-        <h1 className="text-3xl md:text-7xl font-bold mb-6 text-white opacity-0 animate-fade-in text-shadow-glow font-dogelica">
+        <h1 className="text-2xl sm:text-3xl md:text-7xl font-bold mb-4 sm:mb-6 text-white opacity-0 animate-fade-in text-shadow-glow font-dogelica">
           Gorki SoloQ Challenge
         </h1>
         <div className="opacity-0 animate-fade-in-delay">
-          <span className="inline-block px-4 py-2 bg-yellow-400/20 text-yellow-400 font-bold font-dogelica rounded-lg border border-yellow-400/30 text-lg">
+          <span className="inline-block px-3 sm:px-4 py-2 bg-yellow-400/20 text-yellow-400 font-bold font-dogelica rounded-lg border border-yellow-400/30 text-sm sm:text-lg">
             Du 1 Octobre 20h00 au 8 Janvier
           </span>
         </div>
       </div>
 
-      <div className={`relative z-10 grid grid-cols-1 md:grid-cols-2 ${session ? 'lg:grid-cols-4' : 'lg:grid-cols-3'} gap-8 md:gap-12`}>
+      <div className={`relative z-10 grid grid-cols-1 sm:grid-cols-2 ${session ? 'lg:grid-cols-4' : 'lg:grid-cols-3'} gap-4 sm:gap-6 md:gap-8 lg:gap-12 px-4`}>
         {/* Carte 1: Leaderboard */}
         <a 
           href="/leaderboard" 
-          className="bg-black/60 backdrop-blur-sm rounded-xl p-8 text-center border border-gray-800/50 opacity-0 animate-fade-in-delay-2 shadow-2xl hover:border-yellow-400/50 hover:bg-yellow-400/10 transition-all duration-300 group cursor-pointer w-full h-full flex flex-col items-center justify-center"
+          className="bg-black/60 backdrop-blur-sm rounded-xl p-4 sm:p-6 md:p-8 text-center border border-gray-800/50 opacity-0 animate-fade-in-delay-2 shadow-2xl hover:border-yellow-400/50 hover:bg-yellow-400/10 transition-all duration-300 group cursor-pointer w-full h-full flex flex-col items-center justify-center"
         >
-          <div className="text-6xl mb-4 group-hover:scale-110 transition-transform duration-300">
+          <div className="text-4xl sm:text-6xl mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300">
             🏆
           </div>
-          <div className="text-2xl md:text-3xl font-bold text-white mb-3 font-dogelica text-shadow-glow group-hover:text-yellow-400 transition-colors duration-300">
+          <div className="text-lg sm:text-2xl md:text-3xl font-bold text-white mb-2 sm:mb-3 font-dogelica text-shadow-glow group-hover:text-yellow-400 transition-colors duration-300">
             Leaderboard
           </div>
-          <div className="text-sm md:text-lg text-gray-500 font-medium font-dogelica group-hover:text-yellow-300 transition-colors duration-300">
+          <div className="text-xs sm:text-sm md:text-lg text-gray-500 font-medium font-dogelica group-hover:text-yellow-300 transition-colors duration-300">
             Voir le classement des participants
           </div>
         </a>
@@ -93,15 +93,15 @@ export default function Countdown() {
           href="https://www.youtube.com/watch?v=BmtVk8R8jHA" 
           target="_blank"
           rel="noopener noreferrer"
-          className="bg-black/60 backdrop-blur-sm rounded-xl p-8 text-center border border-gray-800/50 opacity-0 animate-fade-in-delay-3 shadow-2xl hover:border-red-500/50 hover:bg-red-500/10 transition-all duration-300 group cursor-pointer w-full h-full flex flex-col items-center justify-center"
+          className="bg-black/60 backdrop-blur-sm rounded-xl p-4 sm:p-6 md:p-8 text-center border border-gray-800/50 opacity-0 animate-fade-in-delay-3 shadow-2xl hover:border-red-500/50 hover:bg-red-500/10 transition-all duration-300 group cursor-pointer w-full h-full flex flex-col items-center justify-center"
         >
-          <div className="text-6xl mb-4 group-hover:scale-110 transition-transform duration-300">
+          <div className="text-4xl sm:text-6xl mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300">
             📺
           </div>
-          <div className="text-2xl md:text-3xl font-bold text-white mb-3 font-dogelica text-shadow-glow group-hover:text-red-400 transition-colors duration-300">
+          <div className="text-lg sm:text-2xl md:text-3xl font-bold text-white mb-2 sm:mb-3 font-dogelica text-shadow-glow group-hover:text-red-400 transition-colors duration-300">
             Vidéo
           </div>
-          <div className="text-sm md:text-lg text-gray-500 font-medium font-dogelica group-hover:text-red-300 transition-colors duration-300">
+          <div className="text-xs sm:text-sm md:text-lg text-gray-500 font-medium font-dogelica group-hover:text-red-300 transition-colors duration-300">
             Regarder sur YouTube
           </div>
         </a>
@@ -110,30 +110,30 @@ export default function Countdown() {
         {session ? (
           <button 
             onClick={() => setShowPredictionsModal(true)}
-            className="bg-black/60 backdrop-blur-sm rounded-xl p-8 text-center border border-gray-800/50 opacity-0 animate-fade-in-delay-4 shadow-2xl hover:border-purple-500/50 hover:bg-purple-500/10 transition-all duration-300 group cursor-pointer w-full h-full flex flex-col items-center justify-center"
+            className="bg-black/60 backdrop-blur-sm rounded-xl p-4 sm:p-6 md:p-8 text-center border border-gray-800/50 opacity-0 animate-fade-in-delay-4 shadow-2xl hover:border-purple-500/50 hover:bg-purple-500/10 transition-all duration-300 group cursor-pointer w-full h-full flex flex-col items-center justify-center"
           >
-            <div className="text-6xl mb-4 group-hover:scale-110 transition-transform duration-300">
+            <div className="text-4xl sm:text-6xl mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300">
               🔮
             </div>
-            <div className="text-2xl md:text-3xl font-bold text-white mb-3 font-dogelica text-shadow-glow group-hover:text-purple-400 transition-colors duration-300">
+            <div className="text-lg sm:text-2xl md:text-3xl font-bold text-white mb-2 sm:mb-3 font-dogelica text-shadow-glow group-hover:text-purple-400 transition-colors duration-300">
               Prédictions
             </div>
-            <div className="text-sm md:text-lg text-gray-500 font-medium font-dogelica group-hover:text-purple-300 transition-colors duration-300">
+            <div className="text-xs sm:text-sm md:text-lg text-gray-500 font-medium font-dogelica group-hover:text-purple-300 transition-colors duration-300">
               Vote sur les prédictions du challenge
             </div>
           </button>
         ) : (
           <a 
             href="/auth/signin" 
-            className="bg-black/60 backdrop-blur-sm rounded-xl p-8 text-center border border-gray-800/50 opacity-0 animate-fade-in-delay-4 shadow-2xl hover:border-[#5865F2]/50 hover:bg-[#5865F2]/10 transition-all duration-300 group cursor-pointer w-full h-full flex flex-col items-center justify-center"
+            className="bg-black/60 backdrop-blur-sm rounded-xl p-4 sm:p-6 md:p-8 text-center border border-gray-800/50 opacity-0 animate-fade-in-delay-4 shadow-2xl hover:border-[#5865F2]/50 hover:bg-[#5865F2]/10 transition-all duration-300 group cursor-pointer w-full h-full flex flex-col items-center justify-center"
           >
-            <div className="text-6xl mb-4 group-hover:scale-110 transition-transform duration-300">
+            <div className="text-4xl sm:text-6xl mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300">
               🔐
             </div>
-            <div className="text-2xl md:text-3xl font-bold text-white mb-3 font-dogelica text-shadow-glow group-hover:text-[#5865F2] transition-colors duration-300">
+            <div className="text-lg sm:text-2xl md:text-3xl font-bold text-white mb-2 sm:mb-3 font-dogelica text-shadow-glow group-hover:text-[#5865F2] transition-colors duration-300">
               Connexion
             </div>
-            <div className="text-sm md:text-lg text-gray-500 font-medium font-dogelica group-hover:text-[#5865F2]/80 transition-colors duration-300">
+            <div className="text-xs sm:text-sm md:text-lg text-gray-500 font-medium font-dogelica group-hover:text-[#5865F2]/80 transition-colors duration-300">
               Connecte-toi avec Discord pour participer
             </div>
           </a>
@@ -141,11 +141,11 @@ export default function Countdown() {
 
         {/* Carte 4: Mystère ??? - Visible seulement si connecté */}
         {session && (
-          <div className="bg-black/60 backdrop-blur-sm rounded-xl p-8 text-center border border-gray-800/50 opacity-0 animate-fade-in-delay-5 shadow-2xl hover:border-blue-500/50 hover:bg-blue-500/10 transition-all duration-300 group w-full h-full flex flex-col items-center justify-center">
-            <div className="text-6xl mb-4 group-hover:scale-110 transition-transform duration-300">
+          <div className="bg-black/60 backdrop-blur-sm rounded-xl p-4 sm:p-6 md:p-8 text-center border border-gray-800/50 opacity-0 animate-fade-in-delay-5 shadow-2xl hover:border-blue-500/50 hover:bg-blue-500/10 transition-all duration-300 group w-full h-full flex flex-col items-center justify-center">
+            <div className="text-4xl sm:text-6xl mb-3 sm:mb-4 group-hover:scale-110 transition-transform duration-300">
               ❓
             </div>
-            <div className="text-2xl md:text-3xl font-bold text-white mb-4 font-dogelica text-shadow-glow group-hover:text-blue-400 transition-colors duration-300">
+            <div className="text-lg sm:text-2xl md:text-3xl font-bold text-white mb-3 sm:mb-4 font-dogelica text-shadow-glow group-hover:text-blue-400 transition-colors duration-300">
               ???
             </div>
             <div className="space-y-3">
