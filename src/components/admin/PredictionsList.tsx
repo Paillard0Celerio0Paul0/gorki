@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { Prediction, PredictionType } from '@/types/predictions';
 
 interface PredictionsListProps {
@@ -177,9 +178,11 @@ export default function PredictionsList({ type }: PredictionsListProps) {
                   <span className="text-gray-400 text-sm">Mentionné:</span>
                   <div className="flex items-center gap-2 bg-gray-800/50 rounded-lg px-2 py-1">
                     {prediction.mentioned_user.avatar_url ? (
-                      <img
+                      <Image
                         src={prediction.mentioned_user.avatar_url}
                         alt={prediction.mentioned_user.username}
+                        width={20}
+                        height={20}
                         className="w-5 h-5 rounded-full"
                       />
                     ) : (
@@ -208,20 +211,26 @@ export default function PredictionsList({ type }: PredictionsListProps) {
                   <div className="mt-2">
                     <div className="text-xs text-gray-400 mb-1">Votants:</div>
                     <div className="flex flex-wrap gap-1">
-                      {prediction.allVotes.map((vote: any) => (
+                      {prediction.allVotes.map((vote: {
+                        id: string;
+                        vote: boolean;
+                        user?: {
+                          username?: string;
+                          avatar_url?: string | null;
+                        };
+                      }) => (
                         <div
                           key={vote.id}
                           className="flex items-center gap-1 bg-gray-800/50 rounded-full px-2 py-1"
                           title={`${vote.user?.username} a voté ${vote.vote ? 'OUI' : 'NON'}`}
                         >
                           {vote.user?.avatar_url ? (
-                            <img
+                            <Image
                               src={vote.user.avatar_url}
-                              alt={vote.user.username}
+                              alt={vote.user.username || 'Avatar'}
+                              width={12}
+                              height={12}
                               className="w-3 h-3 rounded-full"
-                              onError={(e) => {
-                                (e.target as HTMLImageElement).src = '/default-avatar.png';
-                              }}
                             />
                           ) : (
                             <div className="w-3 h-3 rounded-full bg-gray-600 flex items-center justify-center text-white text-xs font-bold">
