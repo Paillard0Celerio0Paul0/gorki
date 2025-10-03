@@ -75,7 +75,7 @@ export default function Countdown() {
         {/* Carte 1: Leaderboard */}
         <a 
           href="/leaderboard" 
-          className="bg-black/60 backdrop-blur-sm rounded-xl p-8 text-center border border-gray-800/50 opacity-0 animate-fade-in-delay-2 shadow-2xl hover:border-yellow-400/50 hover:bg-yellow-400/10 transition-all duration-300 group cursor-pointer"
+          className="bg-black/60 backdrop-blur-sm rounded-xl p-8 text-center border border-gray-800/50 opacity-0 animate-fade-in-delay-2 shadow-2xl hover:border-yellow-400/50 hover:bg-yellow-400/10 transition-all duration-300 group cursor-pointer w-full h-full flex flex-col items-center justify-center"
         >
           <div className="text-6xl mb-4 group-hover:scale-110 transition-transform duration-300">
             🏆
@@ -93,7 +93,7 @@ export default function Countdown() {
           href="https://www.youtube.com/watch?v=BmtVk8R8jHA" 
           target="_blank"
           rel="noopener noreferrer"
-          className="bg-black/60 backdrop-blur-sm rounded-xl p-8 text-center border border-gray-800/50 opacity-0 animate-fade-in-delay-3 shadow-2xl hover:border-red-500/50 hover:bg-red-500/10 transition-all duration-300 group cursor-pointer"
+          className="bg-black/60 backdrop-blur-sm rounded-xl p-8 text-center border border-gray-800/50 opacity-0 animate-fade-in-delay-3 shadow-2xl hover:border-red-500/50 hover:bg-red-500/10 transition-all duration-300 group cursor-pointer w-full h-full flex flex-col items-center justify-center"
         >
           <div className="text-6xl mb-4 group-hover:scale-110 transition-transform duration-300">
             📺
@@ -110,7 +110,7 @@ export default function Countdown() {
         {session ? (
           <button 
             onClick={() => setShowPredictionsModal(true)}
-            className="bg-black/60 backdrop-blur-sm rounded-xl p-8 text-center border border-gray-800/50 opacity-0 animate-fade-in-delay-4 shadow-2xl hover:border-purple-500/50 hover:bg-purple-500/10 transition-all duration-300 group cursor-pointer"
+            className="bg-black/60 backdrop-blur-sm rounded-xl p-8 text-center border border-gray-800/50 opacity-0 animate-fade-in-delay-4 shadow-2xl hover:border-purple-500/50 hover:bg-purple-500/10 transition-all duration-300 group cursor-pointer w-full h-full flex flex-col items-center justify-center"
           >
             <div className="text-6xl mb-4 group-hover:scale-110 transition-transform duration-300">
               🔮
@@ -125,7 +125,7 @@ export default function Countdown() {
         ) : (
           <a 
             href="/auth/signin" 
-            className="bg-black/60 backdrop-blur-sm rounded-xl p-8 text-center border border-gray-800/50 opacity-0 animate-fade-in-delay-4 shadow-2xl hover:border-[#5865F2]/50 hover:bg-[#5865F2]/10 transition-all duration-300 group cursor-pointer"
+            className="bg-black/60 backdrop-blur-sm rounded-xl p-8 text-center border border-gray-800/50 opacity-0 animate-fade-in-delay-4 shadow-2xl hover:border-[#5865F2]/50 hover:bg-[#5865F2]/10 transition-all duration-300 group cursor-pointer w-full h-full flex flex-col items-center justify-center"
           >
             <div className="text-6xl mb-4 group-hover:scale-110 transition-transform duration-300">
               🔐
@@ -141,7 +141,7 @@ export default function Countdown() {
 
         {/* Carte 4: Mystère ??? - Visible seulement si connecté */}
         {session && (
-          <div className="bg-black/60 backdrop-blur-sm rounded-xl p-8 text-center border border-gray-800/50 opacity-0 animate-fade-in-delay-5 shadow-2xl hover:border-blue-500/50 hover:bg-blue-500/10 transition-all duration-300 group">
+          <div className="bg-black/60 backdrop-blur-sm rounded-xl p-8 text-center border border-gray-800/50 opacity-0 animate-fade-in-delay-5 shadow-2xl hover:border-blue-500/50 hover:bg-blue-500/10 transition-all duration-300 group w-full h-full flex flex-col items-center justify-center">
             <div className="text-6xl mb-4 group-hover:scale-110 transition-transform duration-300">
               ❓
             </div>
