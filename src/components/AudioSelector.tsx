@@ -47,18 +47,19 @@ export default function AudioSelector({ onAudioSelected, onCancel }: AudioSelect
         body: formData,
       });
 
-      const data = await response.json();
-
-      if (data.success) {
-        if (data.type === 'blob') {
-          // L'API retourne un Blob directement
-          onAudioSelected('file', audioBlob);
-        } else {
-          // L'API retourne une URL (fallback)
-          onAudioSelected('url', data.url);
-        }
+      if (response.ok && response.headers.get('X-Success') === 'true') {
+        // L'API retourne le fichier audio directement
+        const fileName = response.headers.get('X-File-Name') || 'audio.mp3';
+        const audioBlob = await response.blob();
+        
+        // Créer un nouveau Blob avec le bon nom de fichier
+        const namedBlob = new Blob([audioBlob], { type: audioBlob.type });
+        
+        onAudioSelected('file', namedBlob);
       } else {
-        console.error('Erreur lors de l\'upload:', data.error);
+        // Gestion d'erreur
+        const errorData = await response.json().catch(() => ({ error: 'Erreur inconnue' }));
+        console.error('Erreur lors de l\'upload:', errorData.error);
         alert('Erreur lors de l\'upload du fichier audio');
       }
     } catch (error) {

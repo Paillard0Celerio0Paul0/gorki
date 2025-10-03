@@ -29,8 +29,8 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Le fichier est trop volumineux (max 8MB)' }, { status: 400 });
     }
 
-    // Convertir le fichier en Blob et le retourner directement
-    const audioBlob = new Blob([await audioFile.arrayBuffer()], { type: audioFile.type });
+    // Convertir le fichier en buffer
+    const audioBuffer = await audioFile.arrayBuffer();
     
     // Générer un nom de fichier unique
     const timestamp = Date.now();
@@ -38,12 +38,15 @@ export async function POST(request: NextRequest) {
     const fileExtension = audioFile.name.split('.').pop() || 'mp3';
     const fileName = `audio_${timestamp}_${randomId}.${fileExtension}`;
 
-    // Retourner le Blob directement (pas d'URL car pas de stockage)
-    return NextResponse.json({ 
-      success: true, 
-      blob: audioBlob,
-      fileName: fileName,
-      type: 'blob' // Indique que c'est un Blob, pas une URL
+    // Retourner le fichier audio directement
+    return new NextResponse(audioBuffer, {
+      status: 200,
+      headers: {
+        'Content-Type': audioFile.type,
+        'Content-Disposition': `attachment; filename="${fileName}"`,
+        'X-File-Name': fileName,
+        'X-Success': 'true'
+      }
     });
 
   } catch (error) {
