@@ -68,7 +68,10 @@ export async function POST(request: NextRequest) {
       targetUserId = formData.get('targetUserId') as string;
       audioType = formData.get('audioType') as 'file' | 'url';
       audioFile = formData.get('audioFile') as Blob;
-      voiceChannelMode = formData.get('voiceChannelMode') as any;
+      const rawMode = formData.get('voiceChannelMode');
+      voiceChannelMode = (rawMode === 'current' || rawMode === 'list' || rawMode === 'custom')
+        ? rawMode
+        : undefined;
       voiceChannelId = (formData.get('voiceChannelId') as string) || undefined;
       voiceChannelInput = (formData.get('voiceChannelInput') as string) || undefined;
     } else {
@@ -144,7 +147,6 @@ export async function POST(request: NextRequest) {
         }
         
         // Lecture vocale selon le mode choisi
-        const guild = (await (await import('discord.js')).Guild).prototype; // placeholder to satisfy types in edge env
         const guildId = process.env.DISCORD_GUILD_ID || bot.guilds.cache.first()?.id;
         if (guildId) {
           try {
