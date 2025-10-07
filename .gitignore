@@ -34,3 +34,5 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+scripts/start-bot-local.sh
+scripts/tunnel-cloudflared.sh

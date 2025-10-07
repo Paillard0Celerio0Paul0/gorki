@@ -7,6 +7,9 @@
     "build": "next build --turbopack",
     "start": "next start",
     "lint": "eslint",
+    "bot:local": "tsx server.ts",
+    "tunnel": "cloudflared tunnel --url http://localhost:3001",
+    "bot:all": "concurrently -k \"npm:bot:local\" \"npm:tunnel\"",
     "postinstall": "prisma generate --no-engine",
     "db:generate": "prisma generate",
     "db:push": "prisma db push",
@@ -20,7 +23,9 @@
     "@prisma/client": "^6.16.3",
     "@vercel/analytics": "^1.5.0",
     "@vercel/postgres": "^0.10.0",
+    "cors": "^2.8.5",
     "discord.js": "^14.22.1",
+    "express": "^5.1.0",
     "ffmpeg-static": "^5.2.0",
     "next": "15.5.4",
     "next-auth": "^4.24.11",
@@ -33,12 +38,17 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "concurrently": "^9.2.1",
     "eslint": "^9",
     "eslint-config-next": "15.5.4",
     "tailwindcss": "^4",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.20.6",
     "typescript": "^5"
   }
 }

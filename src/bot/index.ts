@@ -1,6 +1,7 @@
 import { Client, GatewayIntentBits, ChannelType, AttachmentBuilder, VoiceChannel } from 'discord.js';
 import { joinVoiceChannel, createAudioPlayer, createAudioResource, AudioPlayerStatus, VoiceConnectionStatus, entersState, StreamType } from '@discordjs/voice';
 import { Readable } from 'stream';
+import { FFmpeg } from 'prism-media';
 
 // Configuration du bot Discord
 const bot = new Client({
@@ -116,6 +117,8 @@ export async function connectToVoiceChannel(voiceChannelId: string) {
       channelId: voiceChannelId,
       guildId: voiceChannel.guildId,
       adapterCreator: voiceChannel.guild.voiceAdapterCreator,
+      selfDeaf: false,
+      selfMute: false,
     });
 
     // Attendre que la connexion soit prête
@@ -149,44 +152,81 @@ export async function playAudioInVoiceChannel(
     // Rejoindre le channel vocal
     const { connection } = await connectToVoiceChannel(voiceChannelId);
     
-    // Créer un player audio
+    // Créer un player audio (logs d'état)
     const player = createAudioPlayer();
-    
-    // Convertir le Buffer en Readable stream
-    const audioStream = new Readable();
-    audioStream.push(audioBuffer);
-    audioStream.push(null);
-    
-    // Créer la ressource audio
-    const resource = createAudioResource(audioStream, {
-      inputType: StreamType.Arbitrary
+    player.on('stateChange', (oldState, newState) => {
+      console.log(`🎚️ Player state: ${oldState.status} -> ${newState.status}`);
     });
-    
-    // Connecter le player à la connexion vocale
+
+    // Transcoder le MP3 en PCM 48kHz s16le stéréo via ffmpeg
+    const inputStream = Readable.from(audioBuffer);
+    const ffmpeg = new FFmpeg({
+      args: [
+        '-hide_banner',
+        '-loglevel','warning',
+        '-analyzeduration','0',
+        '-vn',
+        '-i','pipe:0',
+        '-f','s16le',
+        '-ar','48000',
+        '-ac','2',
+        'pipe:1'
+      ]
+    });
+    ffmpeg.on('error', (err) => {
+      console.error('FFmpeg error:', err);
+    });
+    const pcmStream = inputStream.pipe(ffmpeg);
+
+    // Créer la ressource audio en PCM brut
+    const resource = createAudioResource(pcmStream, {
+      inputType: StreamType.Raw,
+      inlineVolume: true
+    });
+    if (resource.volume) {
+      resource.volume.setVolume(1.0);
+    }
+
+    // Connecter le player à la connexion vocale et lancer la lecture
     connection.subscribe(player);
     
-    // Jouer l'audio
-    player.play(resource);
-    
-    console.log(`🔊 Lecture de l'audio: ${fileName}`);
-    
-    // Attendre la fin de la lecture
-    return new Promise((resolve, reject) => {
-      player.on(AudioPlayerStatus.Idle, () => {
-        console.log('✅ Lecture audio terminée');
-        connection.destroy();
-        resolve({
-          success: true,
-          message: 'Audio joué avec succès'
-        });
-      });
-      
-      player.on('error', (error: Error) => {
-        console.error('❌ Erreur lors de la lecture audio:', error);
-        connection.destroy();
-        reject(error);
-      });
+    // Surveillance de la connexion pour éviter les déconnexions précoces
+    connection.on('stateChange', async (oldState, newState) => {
+      console.log(`🔌 Voice state: ${oldState.status} -> ${newState.status}`);
+      if (newState.status === VoiceConnectionStatus.Disconnected) {
+        try {
+          await Promise.race([
+            entersState(connection, VoiceConnectionStatus.Signalling, 5_000),
+            entersState(connection, VoiceConnectionStatus.Connecting, 5_000),
+          ]);
+          console.log('🔁 Reconnexion tentative réussie');
+        } catch {
+          console.warn('❌ Reconnexion échouée, destruction de la connexion');
+          connection.destroy();
+        }
+      }
     });
+
+    player.play(resource);
+
+    console.log(`🔊 Lecture de l'audio: ${fileName}`);
+
+    // Ne pas bloquer l'appel: écouter les événements en tâche de fond
+    player.on(AudioPlayerStatus.Idle, () => {
+      console.log('✅ Lecture audio terminée');
+      connection.destroy();
+    });
+
+    player.on('error', (error: Error) => {
+      console.error('❌ Erreur lors de la lecture audio:', error);
+      connection.destroy();
+    });
+
+    // Retourner immédiatement pour ne pas bloquer l'API
+    return {
+      success: true,
+      message: 'Lecture démarrée'
+    };
 
   } catch (error) {
     console.error('Erreur lors de la lecture audio:', error);
