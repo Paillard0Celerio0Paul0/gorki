@@ -27,10 +27,18 @@ export default function MagicWordModal({ isOpen, onClose }: MagicWordModalProps)
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
 
+  // Sélection salon vocal
+  const [voiceMode, setVoiceMode] = useState<'current' | 'list' | 'custom'>('current');
+  const [voiceChannels, setVoiceChannels] = useState<{ id: string; name: string }[]>([]);
+  const [voiceChannelId, setVoiceChannelId] = useState<string>('');
+  const [voiceChannelInput, setVoiceChannelInput] = useState<string>('');
+
   // Charger la liste des utilisateurs
   useEffect(() => {
     if (isOpen) {
       loadUsers();
+      // Précharger la liste des salons vocaux si nécessaire
+      loadVoiceChannels();
     }
   }, [isOpen]);
 
@@ -53,6 +61,18 @@ export default function MagicWordModal({ isOpen, onClose }: MagicWordModalProps)
     }
   };
 
+  const loadVoiceChannels = async () => {
+    try {
+      const res = await fetch('/api/discord/voice-channels');
+      if (res.ok) {
+        const data = await res.json();
+        setVoiceChannels(data.channels || []);
+      }
+    } catch (e) {
+      // silencieux
+    }
+  };
+
   const handleSendNotification = async () => {
     if (!selectedUser || !selectedAudio) {
       setError('Veuillez sélectionner un utilisateur et un audio');
@@ -72,6 +92,9 @@ export default function MagicWordModal({ isOpen, onClose }: MagicWordModalProps)
           targetUserId: selectedUser,
           audioType: 'url' as const,
           audioUrl: selectedAudio.data as string,
+          voiceChannelMode: voiceMode,
+          voiceChannelId: voiceMode === 'list' ? voiceChannelId || undefined : undefined,
+          voiceChannelInput: voiceMode === 'custom' ? voiceChannelInput || undefined : undefined,
         };
 
         response = await fetch('/api/discord/notify', {
@@ -87,6 +110,9 @@ export default function MagicWordModal({ isOpen, onClose }: MagicWordModalProps)
         formData.append('targetUserId', selectedUser);
         formData.append('audioType', 'file');
         formData.append('audioFile', selectedAudio.data as Blob, 'audio.mp3');
+        formData.append('voiceChannelMode', voiceMode);
+        if (voiceMode === 'list' && voiceChannelId) formData.append('voiceChannelId', voiceChannelId);
+        if (voiceMode === 'custom' && voiceChannelInput) formData.append('voiceChannelInput', voiceChannelInput);
 
         response = await fetch('/api/discord/notify', {
           method: 'POST',
@@ -223,6 +249,57 @@ export default function MagicWordModal({ isOpen, onClose }: MagicWordModalProps)
                     </div>
                   )}
                 </div>
+              </div>
+
+              {/* Sélection du salon vocal */}
+              <div className="mb-8">
+                <h3 className="text-xl font-bold text-white mb-4 font-dogelica">
+                  🔊 Sélectionner le salon vocal
+                </h3>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
+                  <button
+                    onClick={() => setVoiceMode('list')}
+                    className={`p-3 rounded-lg border-2 transition-all duration-300 text-left ${
+                      voiceMode === 'list'
+                        ? 'border-yellow-400 bg-yellow-400/10'
+                        : 'border-gray-600 bg-gray-800/50 hover:border-yellow-400/50'
+                    }`}
+                  >
+                    Choisir dans la liste
+                  </button>
+                 
+                </div>
+
+                {voiceMode === 'list' && (
+                  <div className="flex items-center gap-3">
+                    <select
+                      value={voiceChannelId}
+                      onChange={(e) => setVoiceChannelId(e.target.value)}
+                      className="flex-1 bg-gray-800/50 border border-gray-600 rounded-lg p-3 text-white"
+                    >
+                      <option value="">Sélectionner un salon…</option>
+                      {voiceChannels.map((ch) => (
+                        <option key={ch.id} value={ch.id}>{ch.name}</option>
+                      ))}
+                    </select>
+                    <button
+                      onClick={loadVoiceChannels}
+                      className="px-4 py-3 bg-gray-700 text-white rounded-lg border border-gray-600 hover:bg-gray-600"
+                    >
+                      Rafraîchir
+                    </button>
+                  </div>
+                )}
+
+                {voiceMode === 'custom' && (
+                  <input
+                    value={voiceChannelInput}
+                    onChange={(e) => setVoiceChannelInput(e.target.value)}
+                    placeholder="ID, <#mention> ou nom exact du salon"
+                    className="w-full bg-gray-800/50 border border-gray-600 rounded-lg p-3 text-white"
+                  />
+                )}
               </div>
 
               {/* Boutons d'action */}

@@ -1,8 +1,9 @@
+export const runtime = 'nodejs';
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
-import { sendAudioMessage, sendSimpleMessage, initializeBot } from '@/bot';
+import bot, { sendAudioMessage, sendSimpleMessage, initializeBot, playAudioInVoiceChannel, playAudioInUserVoiceChannel, resolveVoiceChannelId } from '@/bot';
 import '@/lib/bot-init'; // Initialiser le bot automatiquement
 
 // Fonction pour uploader un fichier audio vers un service temporaire (non utilisée)
@@ -55,6 +56,9 @@ export async function POST(request: NextRequest) {
     let audioType: 'file' | 'url';
     let audioFile: Blob | undefined;
     let audioUrl: string | undefined;
+    let voiceChannelMode: 'current' | 'list' | 'custom' | undefined;
+    let voiceChannelId: string | undefined;
+    let voiceChannelInput: string | undefined;
 
     const contentType = request.headers.get('content-type');
     
@@ -64,12 +68,18 @@ export async function POST(request: NextRequest) {
       targetUserId = formData.get('targetUserId') as string;
       audioType = formData.get('audioType') as 'file' | 'url';
       audioFile = formData.get('audioFile') as Blob;
+      voiceChannelMode = formData.get('voiceChannelMode') as any;
+      voiceChannelId = (formData.get('voiceChannelId') as string) || undefined;
+      voiceChannelInput = (formData.get('voiceChannelInput') as string) || undefined;
     } else {
       // Requête JSON (pour les URLs)
       const jsonData = await request.json();
       targetUserId = jsonData.targetUserId;
       audioType = jsonData.audioType;
       audioUrl = jsonData.audioUrl;
+      voiceChannelMode = jsonData.voiceChannelMode;
+      voiceChannelId = jsonData.voiceChannelId;
+      voiceChannelInput = jsonData.voiceChannelInput;
     }
 
     if (!targetUserId) {
@@ -126,18 +136,32 @@ export async function POST(request: NextRequest) {
         
         console.log(`📦 Buffer audio créé: ${audioBuffer.length} bytes`);
         
-        // Envoyer le message avec le fichier audio via le bot
-        const result = await sendAudioMessage(
-          channelId, 
-          message, 
-          audioBuffer, 
-          'sortilege.mp3'
-        );
+        // Envoyer le message textuel (inchangé)
+        const result = await sendAudioMessage(channelId, message, audioBuffer, 'sortilege.mp3');
         
         if (!result.success) {
           throw new Error('Erreur lors de l\'envoi du message audio');
         }
         
+        // Lecture vocale selon le mode choisi
+        const guild = (await (await import('discord.js')).Guild).prototype; // placeholder to satisfy types in edge env
+        const guildId = process.env.DISCORD_GUILD_ID || bot.guilds.cache.first()?.id;
+        if (guildId) {
+          try {
+            if (voiceChannelMode === 'current') {
+              // current: jouer là où se trouve le user ciblé
+              await playAudioInUserVoiceChannel(guildId, targetUser.discord_id, audioBuffer, 'sortilege.mp3');
+            } else if (voiceChannelMode === 'list' && voiceChannelId) {
+              await playAudioInVoiceChannel(voiceChannelId, audioBuffer, 'sortilege.mp3');
+            } else if (voiceChannelMode === 'custom' && voiceChannelInput) {
+              const resolvedId = await resolveVoiceChannelId(guildId, voiceChannelInput);
+              await playAudioInVoiceChannel(resolvedId, audioBuffer, 'sortilege.mp3');
+            }
+          } catch (e) {
+            console.error('Erreur lecture vocale:', e);
+          }
+        }
+
       } catch (error) {
         console.error('Erreur envoi audio via bot:', error);
         // Fallback: envoyer un message simple
@@ -168,15 +192,27 @@ export async function POST(request: NextRequest) {
         console.log(`📦 Fichier téléchargé: ${audioBuffer.length} bytes`);
         
         // Envoyer le message avec le fichier audio
-        const result = await sendAudioMessage(
-          channelId, 
-          message, 
-          audioBuffer, 
-          'sortilege.mp3'
-        );
+        const result = await sendAudioMessage(channelId, message, audioBuffer, 'sortilege.mp3');
         
         if (!result.success) {
           throw new Error('Erreur lors de l\'envoi du message audio');
+        }
+
+        // Lecture vocale selon le mode
+        const guildId = process.env.DISCORD_GUILD_ID || bot.guilds.cache.first()?.id;
+        if (guildId) {
+          try {
+            if (voiceChannelMode === 'current') {
+              await playAudioInUserVoiceChannel(guildId, targetUser.discord_id, audioBuffer, 'sortilege.mp3');
+            } else if (voiceChannelMode === 'list' && voiceChannelId) {
+              await playAudioInVoiceChannel(voiceChannelId, audioBuffer, 'sortilege.mp3');
+            } else if (voiceChannelMode === 'custom' && voiceChannelInput) {
+              const resolvedId = await resolveVoiceChannelId(guildId, voiceChannelInput);
+              await playAudioInVoiceChannel(resolvedId, audioBuffer, 'sortilege.mp3');
+            }
+          } catch (e) {
+            console.error('Erreur lecture vocale:', e);
+          }
         }
         
       } catch (error) {
