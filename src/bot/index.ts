@@ -158,7 +158,7 @@ export async function playAudioInVoiceChannel(
       console.log(`🎚️ Player state: ${oldState.status} -> ${newState.status}`);
     });
 
-    // Transcoder le MP3 en PCM 48kHz s16le stéréo via ffmpeg
+    // Transcoder le MP3 en Ogg Opus 48kHz (format attendu par Discord)
     const inputStream = Readable.from(audioBuffer);
     const ffmpeg = new FFmpeg({
       args: [
@@ -167,20 +167,26 @@ export async function playAudioInVoiceChannel(
         '-analyzeduration','0',
         '-vn',
         '-i','pipe:0',
-        '-f','s16le',
         '-ar','48000',
         '-ac','2',
+        '-c:a','libopus',
+        '-b:a','128k',
+        '-vbr','on',
+        '-f','ogg',
         'pipe:1'
       ]
     });
     ffmpeg.on('error', (err) => {
       console.error('FFmpeg error:', err);
     });
+    ffmpeg.on('close', (code: number) => {
+      console.log('FFmpeg closed with code:', code);
+    });
     const pcmStream = inputStream.pipe(ffmpeg);
 
-    // Créer la ressource audio en PCM brut
+    // Créer la ressource audio en Ogg Opus
     const resource = createAudioResource(pcmStream, {
-      inputType: StreamType.Raw,
+      inputType: StreamType.OggOpus,
       inlineVolume: true
     });
     if (resource.volume) {
