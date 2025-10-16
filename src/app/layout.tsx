@@ -6,6 +6,8 @@ import { Analytics } from "@vercel/analytics/next"
 import SessionProvider from "@/components/providers/SessionProvider"
 import UserOverlay from "@/components/UserOverlay"
 
+import SupportOverlay from "@/components/SupportOverlay"
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -44,8 +46,11 @@ export default function RootLayout({
       >
         <SessionProvider>
           <Navigation />
-          {children}
-          <UserOverlay />
+          
+          
+          <SupportOverlay />
+<SupportOverlay />
+{children}          <UserOverlay />
           <Analytics />
         </SessionProvider>
       </body>
